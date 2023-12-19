@@ -3,6 +3,7 @@ Widget ReUsableBanner(){
   return Container(
     height: 250,
     width: double.infinity,
+    margin: EdgeInsets.symmetric(horizontal: 8.0),
     decoration: const BoxDecoration(
       color: Colors.red,
       borderRadius: BorderRadius.all(Radius.circular(12.0)),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Constants/constant.dart';
-
 import '../Constants/Banner.dart';
+import '../Constants/MyDrawer.dart';
 import '../Constants/ReusableContainer.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       ///DRAWER
-      drawer: Drawer(),
+      drawer: MyDrawer(),
       /// BODY
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                ReUsableBanner(),
               /// HERBS SEASONINGS ROW
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5.0),
+                margin: EdgeInsets.symmetric(horizontal: 8.0,vertical: 5.0),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -54,14 +54,47 @@ class HomeScreen extends StatelessWidget {
               ),
               /// HERBS SEASONINGS CONTAINER
               Container(
-                height: 200,
-                width: 200,
-                child: Row(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      ReusableContainer(context),
+                      ReusableContainer(context),
+                      ReusableContainer(context),
+                      ReusableContainer(context),
+                      ReusableContainer(context),
+                      ReusableContainer(context),
+                    ],
+                  ),
+                ),
+              ),
+              /// FRESH FRUITS ROW
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 8.0,vertical: 5.0),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // ReusableContainer(),
+                    Text("Fresh Fruits ",style: TextStyle(fontSize: 22),),
+                    Text("View All",style: TextStyle(fontSize: 18,color: Colors.black45),),
                   ],
                 ),
               ),
+              /// FRESH FRUITS CONTAINER
+              Container(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      ReusableContainer(context),
+                      ReusableContainer(context),
+                      ReusableContainer(context),
+                      ReusableContainer(context),
+                    ],
+                  ),
+                ),
+              ),
+              /// BANNER
+              ReUsableBanner(),
             ],
           ),
         ),
