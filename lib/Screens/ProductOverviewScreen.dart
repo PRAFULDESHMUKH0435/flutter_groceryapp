@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 class ProductOverViewScreen extends StatefulWidget {
-  const ProductOverViewScreen({super.key});
+  String productname;
+  String productimageurl;
+  ProductOverViewScreen({required this.productname,required this.productimageurl});
 
   @override
   State<ProductOverViewScreen> createState() => _ProductOverViewScreenState();
@@ -23,12 +25,12 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ListTile(
-              title: Text('Fresh Basil',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+              title: Text(widget.productname,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
               subtitle: Text('\$50',style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400,color: Colors.green),),
             ),
             Container(
                 height: 150,
-                child: Center(child: Image(image: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5JhuY3NqYQb1ZdlsTccNzhuVxS2oUvAcJLaysileBgA&s')))),
+                child: Center(child: Image(image: NetworkImage(widget.productimageurl)))),
             Padding(
               padding: const EdgeInsets.only(left: 8.0,top: 5.0),
               child: Text('Available Options',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),

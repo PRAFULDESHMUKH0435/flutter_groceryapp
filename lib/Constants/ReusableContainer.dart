@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Screens/ProductOverviewScreen.dart';
-Widget ReusableContainer(BuildContext context){
+Widget ReusableContainer(BuildContext context,String productname,String productimageurl){
   return InkWell(
     onTap: (){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductOverViewScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductOverViewScreen(productname: productname,productimageurl: productimageurl,)));
     },
     child: Container(
       height: 280,
@@ -16,10 +16,10 @@ Widget ReusableContainer(BuildContext context){
       ),
       child: Column(
         children: [
-          Expanded(child: Image(image: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5JhuY3NqYQb1ZdlsTccNzhuVxS2oUvAcJLaysileBgA&s'),)),
+          Expanded(child: Image(image: NetworkImage(productimageurl ??" "),)),
           Expanded(child: Column(
             children: [
-              Text('Fresh Basil',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+              Text(productname??" ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
               Text('50\$ /50 Gram',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w400),),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Screens/ProfileScreen.dart';
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
@@ -11,7 +12,7 @@ class MyDrawer extends StatelessWidget {
           DrawerHeader(child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 45,
                 backgroundColor: Colors.white70,
                 child: CircleAvatar(
@@ -31,10 +32,15 @@ class MyDrawer extends StatelessWidget {
           )),
           Expanded(
             child: ListView(
-              children: const [
+              children:  [
                 ListTile(
                   title: Text('Home'),
                   leading: Icon(Icons.home_outlined),
+                ),
+                ListTile(
+                  title: Text('Profile'),
+                  leading: Icon(Icons.person_outline),
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen())),
                 ),
                 ListTile(
                   title: Text('Category'),

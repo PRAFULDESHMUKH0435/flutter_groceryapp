@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 5.0),
+          padding: EdgeInsets.symmetric(horizontal: 6.0,vertical: 5.0),
           child: Column(
             children: [
               /// BANNER
@@ -58,12 +58,9 @@ class HomeScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      ReusableContainer(context),
-                      ReusableContainer(context),
-                      ReusableContainer(context),
-                      ReusableContainer(context),
-                      ReusableContainer(context),
-                      ReusableContainer(context),
+                      ReusableContainer(context,"Fresh Basil","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6gD2kQ5bjGtcOGGu263g9mNapJ-37mNGWjNegxVWpxg&s"),
+                      ReusableContainer(context,"Fresh Potatos","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Az_33BCDmbgQtxpSR41Y335IMfZIlaHgCQ&usqp=CAU"),
+                      ReusableContainer(context,"Fresh LadyFinger","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPrvl71rjCugVR75IvrvB49T6ujOIqhqkTPmNmP9m5Ig&s"),
                     ],
                   ),
                 ),
@@ -85,10 +82,10 @@ class HomeScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      ReusableContainer(context),
-                      ReusableContainer(context),
-                      ReusableContainer(context),
-                      ReusableContainer(context),
+                      ReusableContainer(context,"Fresh Basil","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6gD2kQ5bjGtcOGGu263g9mNapJ-37mNGWjNegxVWpxg&s"),
+                      ReusableContainer(context,"Fresh Potatos","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Az_33BCDmbgQtxpSR41Y335IMfZIlaHgCQ&usqp=CAU"),
+                      ReusableContainer(context,"Fresh LadyFinger","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPrvl71rjCugVR75IvrvB49T6ujOIqhqkTPmNmP9m5Ig&s"),
+
                     ],
                   ),
                 ),
