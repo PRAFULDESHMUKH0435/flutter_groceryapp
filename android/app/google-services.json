@@ -1,45 +1,44 @@
 {
   "project_info": {
-    "project_number": "811771288900",
-    "project_id": "fluttergroceryapp-a77de",
-    "storage_bucket": "fluttergroceryapp-a77de.appspot.com"
+    "project_number": "1004979246500",
+    "project_id": "grocery-877e5",
+    "storage_bucket": "grocery-877e5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:811771288900:android:d7beb76f66a22656940b11",
+        "mobilesdk_app_id": "1:1004979246500:android:b2e9f19f855fac9c145d31",
         "android_client_info": {
           "package_name": "com.example.flutter_groceryapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1004979246500-d5uameq99b6sq3h5f00elm8copjvca4d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_groceryapp",
+            "certificate_hash": "3498c0693b0d558b2fb6c8a2d66f876f4d54824a"
+          }
+        },
+        {
+          "client_id": "1004979246500-2ec5h0eqvrugncsh5c3js7ipbvc2nvmc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyB9TxsLb2S1sydWZmJps4Jebg-bPyfNLzs"
+          "current_key": "AIzaSyCuooJswwVdnW0japDaZ-CN4woG1Pw49xQ"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:811771288900:android:55f50d108a0f7b17940b11",
-        "android_client_info": {
-          "package_name": "com.flutter.grocery_app"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB9TxsLb2S1sydWZmJps4Jebg-bPyfNLzs"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004979246500-2ec5h0eqvrugncsh5c3js7ipbvc2nvmc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

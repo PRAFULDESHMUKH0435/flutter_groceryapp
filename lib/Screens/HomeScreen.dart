@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Constants/constant.dart';
+import 'package:flutter_groceryapp/Screens/ReviewCartScreen.dart';
+import 'package:flutter_groceryapp/Screens/SearchItemScreen.dart';
 import '../Constants/Banner.dart';
 import '../Constants/MyDrawer.dart';
 import '../Constants/ReusableContainer.dart';
@@ -18,13 +20,13 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.0),
             child: CircleAvatar(
-              child: IconButton(icon: Icon(Icons.search_outlined),onPressed: (){},),
+              child: IconButton(icon: Icon(Icons.search_outlined),onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchItemScreen())),),
             ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.0),
             child: CircleAvatar(
-              child: IconButton(icon: Icon(Icons.shopping_bag_outlined),onPressed: (){},),
+              child: IconButton(icon: Icon(Icons.shopping_bag_outlined),onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewCartScreen())),),
             ),
           ),
 
