@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Providers/FreshFruitsProvider.dart';
 import 'package:flutter_groceryapp/Providers/HerbsProductProvider.dart';
 import 'package:flutter_groceryapp/Screens/HomeScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,7 +9,15 @@ import 'package:provider/provider.dart';
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  Platform.isAndroid?
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: "AIzaSyCuooJswwVdnW0japDaZ-CN4woG1Pw49xQ",
+      appId: "1:1004979246500:android:b2e9f19f855fac9c145d31",
+      messagingSenderId: "1004979246500",
+      projectId: "grocery-877e5",
+    ),
+  ): await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -17,7 +28,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_)=>HerbsProductProvider())
+          ChangeNotifierProvider(create: (_)=>HerbsProductProvider()),
+          ChangeNotifierProvider(create: (_)=>FreshFruitsProvider()),
         ],
     child:  MaterialApp(
       debugShowCheckedModeBanner: false,

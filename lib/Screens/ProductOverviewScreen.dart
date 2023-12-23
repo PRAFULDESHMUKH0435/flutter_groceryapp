@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 class ProductOverViewScreen extends StatefulWidget {
   String productname;
   String productimageurl;
-  ProductOverViewScreen({required this.productname,required this.productimageurl});
+  int productprice;
+  ProductOverViewScreen({required this.productname,required this.productimageurl,required this.productprice});
 
   @override
   State<ProductOverViewScreen> createState() => _ProductOverViewScreenState();
@@ -26,7 +27,7 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
           children: [
             ListTile(
               title: Text(widget.productname,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-              subtitle: Text('\$50',style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400,color: Colors.green),),
+              subtitle: Text('\$${widget.productprice}',style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400,color: Colors.green),),
             ),
             Container(
                 height: 150,

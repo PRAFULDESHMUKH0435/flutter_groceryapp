@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-Widget SingleContainer(bool issearchscreen){
+Widget SingleContainer(bool issearchscreen,String prodname,String proprice,String proimage){
   return Container(
     margin: EdgeInsets.symmetric(horizontal: 5.0,vertical: 5.0),
     height: 120,
@@ -15,14 +15,14 @@ Widget SingleContainer(bool issearchscreen){
             flex: 1,
               child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Center(child: Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6gD2kQ5bjGtcOGGu263g9mNapJ-37mNGWjNegxVWpxg&s',height: 120,width: 80,)))),
+                  child: Center(child: Image.network(proimage,height: 120,width: 80,)))),
           Expanded(
             flex: 2,
             child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text("Fresh Basil",style: TextStyle(fontSize: 22,color: Colors.black,fontWeight: FontWeight.bold),),
-              Text("\$50",style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),),
+              Text(prodname,style: TextStyle(fontSize: 22,color: Colors.black,fontWeight: FontWeight.bold),),
+              Text("\${$proprice}",style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),),
               issearchscreen? Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.blueGrey,width: 2.0,),

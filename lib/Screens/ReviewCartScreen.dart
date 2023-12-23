@@ -10,11 +10,20 @@ class ReviewCartScreen extends StatelessWidget {
         title: Text('Review Cart'),
         backgroundColor: Colors.yellow,
       ),
-      body: ListView(
-        children: [
-          SingleContainer(false),
-          SingleContainer(false)
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 250,
+              width: 250,
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage('assets/Images/empty_cart.png'))
+              ),
+            ),
+            Text("Your Cart Is Empty",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
+          ],
+        ),
       ),
     );
   }
