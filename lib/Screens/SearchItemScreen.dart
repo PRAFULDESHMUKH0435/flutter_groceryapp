@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Constants/singlecontainer.dart';
 import 'package:flutter_groceryapp/Providers/HerbsProductProvider.dart';
 import 'package:provider/provider.dart';
-
 import '../Models/HerbsProductModel.dart';
-class SearchItemScreen extends StatelessWidget {
-  List<HerbsProductModel> searchlist =[];
-  SearchItemScreen({required this.searchlist});
-
-
+class SearchItemScreen extends StatefulWidget {
+  List<HerbsProductModel> searchitemslist =[];
+  SearchItemScreen({required this.searchitemslist});
 
   @override
+  State<SearchItemScreen> createState() => _SearchItemScreenState();
+}
+
+class _SearchItemScreenState extends State<SearchItemScreen> {
+  @override
   Widget build(BuildContext context) {
+    print("SEARCH ITEMS BUILD METHOD CALLED");
     final searchprovider = Provider.of<HerbsProductProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xffcbcbcb),
@@ -34,8 +37,10 @@ class SearchItemScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 5.0),
               child: TextField(
                 onChanged: (newvalue){
-                  searchprovider.issearching=true;
-                  searchprovider.SearchProducts(newvalue);
+                  setState(() {
+                    searchprovider.SearchProducts(newvalue,widget.searchitemslist);
+                    widget.searchitemslist=searchprovider.updatedsearchlist;
+                  });
                 },
                 decoration: InputDecoration(
                   hintText: "Search For Items In Store",
@@ -48,9 +53,9 @@ class SearchItemScreen extends StatelessWidget {
               Expanded(
               child: Container(
                 child: ListView.builder(
-                    itemCount: searchprovider.allitemslist.length,
+                    itemCount: widget.searchitemslist.length,
                     itemBuilder: (context,index){
-                       return SingleContainer(true,searchprovider.allitemslist[index].productname,searchprovider.allitemslist[index].productprice.toString(),searchprovider.allitemslist[index].productimage);
+                       return SingleContainer(issearchscreen: true,prodname:widget.searchitemslist[index].productname,proprice:widget.searchitemslist[index].productprice.toString(),proimage:widget.searchitemslist[index].productimage);
                   }
                 ),
               ),

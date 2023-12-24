@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Constants/singlecontainer.dart';
+import 'package:provider/provider.dart';
+import '../Providers/ReviewCartProvider.dart';
 class ReviewCartScreen extends StatelessWidget {
   const ReviewCartScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final reviewcartprovider = Provider.of<ReviewCartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Review Cart'),
         backgroundColor: Colors.yellow,
       ),
       body: Center(
-        child: Column(
+        child: reviewcartprovider.cartlist.length==0?  Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
@@ -23,6 +25,24 @@ class ReviewCartScreen extends StatelessWidget {
             ),
             Text("Your Cart Is Empty",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
           ],
+        ):ListView.builder(
+            itemCount: reviewcartprovider.cartlist.length,
+            itemBuilder: (context,index){
+              return SingleContainer(issearchscreen: false,prodname:reviewcartprovider.cartlist[index].cartname,proprice:reviewcartprovider.cartlist[index].cartprice.toString(),proimage:reviewcartprovider.cartlist[index].cartimage);
+            })
+      ),
+      bottomNavigationBar: ListTile(
+        title: Text("Total Amount",style: TextStyle(fontSize: 20),),
+        subtitle: Text("\$130.5",style: TextStyle(color: Colors.green,fontSize: 18),),
+        trailing: Container(
+          decoration: BoxDecoration(
+            color: Colors.yellow,
+            borderRadius: BorderRadius.all(Radius.circular(18.0))
+          ),
+          child: MaterialButton(
+            child: Text("Checkout",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+            onPressed: (){},
+          ),
         ),
       ),
     );

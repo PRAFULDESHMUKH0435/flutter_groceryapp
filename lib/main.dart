@@ -1,8 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Providers/ReviewCartProvider.dart';
 import 'package:flutter_groceryapp/Providers/FreshFruitsProvider.dart';
 import 'package:flutter_groceryapp/Providers/HerbsProductProvider.dart';
+import 'package:flutter_groceryapp/Providers/WishListProvider.dart';
 import 'package:flutter_groceryapp/Screens/HomeScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,8 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_)=>HerbsProductProvider()),
           ChangeNotifierProvider(create: (_)=>FreshFruitsProvider()),
+          ChangeNotifierProvider(create: (_)=>ReviewCartProvider()),
+          ChangeNotifierProvider(create: (_)=>WishListProvider())
         ],
     child:  MaterialApp(
       debugShowCheckedModeBanner: false,

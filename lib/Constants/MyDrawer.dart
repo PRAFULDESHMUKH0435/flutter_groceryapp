@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Screens/ProfileScreen.dart';
+import 'package:flutter_groceryapp/Screens/WishListScreen.dart';
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
@@ -45,6 +46,13 @@ class MyDrawer extends StatelessWidget {
                 ListTile(
                   title: Text('Category'),
                   leading: Icon(Icons.category_outlined),
+                ),
+                ListTile(
+                    title: Text('WishList'),
+                  leading: Icon(Icons.favorite_outline),
+                  onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>WishListScreen()));
+                  },
                 ),
                 ListTile(
                   title: Text('About'),

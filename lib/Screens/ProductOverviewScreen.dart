@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Providers/WishListProvider.dart';
+import 'package:provider/provider.dart';
 class ProductOverViewScreen extends StatefulWidget {
   String productname;
   String productimageurl;
@@ -13,6 +15,7 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
   String defaultvalue = 'Basil';
   @override
   Widget build(BuildContext context) {
+    final wishlistprovider = Provider.of<WishListProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xffcbcbcb),
       appBar: AppBar(
@@ -48,9 +51,12 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
           children: [
             Expanded(
               child: InkWell(
-                onTap: (){},
+                onTap: (){
+                  wishlistprovider.AddItemToWishList(widget.productname,widget.productimageurl,widget.productprice);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${widget.productname} Added To Wishlist")));
+                },
                 child: Container(
-                  height: 40,
+                  height: 50,
                   decoration: BoxDecoration(
                     color: Colors.black,
                   ),
@@ -68,7 +74,7 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
               child: InkWell(
                 onTap: (){},
                 child: Container(
-                  height: 40,
+                  height: 50,
                   decoration: BoxDecoration(
                     color: Colors.yellow,
                   ),

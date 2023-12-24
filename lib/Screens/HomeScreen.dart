@@ -16,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 class _HomeScreenState extends State<HomeScreen> {
 
-
   @override
   void initState() {
     final productprovider = Provider.of<HerbsProductProvider>(context,listen: false);
@@ -24,7 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
     productprovider.FetchFreshFruits();
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.0),
             child: CircleAvatar(
-              child: IconButton(icon: Icon(Icons.search_outlined),onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchItemScreen(searchlist:productprovider.allitemslist,))),),
+              child: IconButton(icon: Icon(Icons.search_outlined),onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchItemScreen(searchitemslist: productprovider.allitemslist,))),),
             ),
           ),
           Padding(
@@ -72,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text("Herbs Seasonings",style: TextStyle(fontSize: 22),),
                     InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchItemScreen(searchlist: productprovider.Herbsproductlist,)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchItemScreen(searchitemslist: productprovider.Herbsproductlist)));
                         },
                         child: Text("View All",style: TextStyle(fontSize: 18,color: Colors.black45),)),
                   ],
@@ -98,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text("Fresh Fruits ",style: TextStyle(fontSize: 22),),
                     InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchItemScreen(searchlist: productprovider.Freshfruitslist)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchItemScreen(searchitemslist: productprovider.Freshfruitslist,)));
                         },
                         child: Text("View All",style: TextStyle(fontSize: 18,color: Colors.black45),)),
                   ],
