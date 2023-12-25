@@ -3,6 +3,7 @@ import 'package:flutter_groceryapp/Constants/singlecontainer.dart';
 import 'package:flutter_groceryapp/Providers/HerbsProductProvider.dart';
 import 'package:provider/provider.dart';
 import '../Models/HerbsProductModel.dart';
+
 class SearchItemScreen extends StatefulWidget {
   List<HerbsProductModel> searchitemslist =[];
   SearchItemScreen({required this.searchitemslist});
@@ -48,14 +49,14 @@ class _SearchItemScreenState extends State<SearchItemScreen> {
                   fillColor: Colors.grey.shade400,
                   filled: true
                 ),
-              ),
+              )
             ),
               Expanded(
               child: Container(
                 child: ListView.builder(
                     itemCount: widget.searchitemslist.length,
                     itemBuilder: (context,index){
-                       return SingleContainer(issearchscreen: true,prodname:widget.searchitemslist[index].productname,proprice:widget.searchitemslist[index].productprice.toString(),proimage:widget.searchitemslist[index].productimage);
+                       return SingleContainer(issearchscreen: true,prodname:widget.searchitemslist[index].productname,proprice:widget.searchitemslist[index].productprice.toString(),proimage:widget.searchitemslist[index].productimage,proid: widget.searchitemslist[index].proid);
                   }
                 ),
               ),
@@ -68,10 +69,3 @@ class _SearchItemScreenState extends State<SearchItemScreen> {
 }
 
 
-
-// children: [
-// SingleContainer(true),
-// SingleContainer(true),
-// SingleContainer(true),
-// SingleContainer(true),
-// ],

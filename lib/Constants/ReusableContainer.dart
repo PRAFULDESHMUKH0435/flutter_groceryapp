@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Constants/QuantityDropDown.dart';
-import 'package:flutter_groceryapp/Providers/HerbsProductProvider.dart';
 import 'package:flutter_groceryapp/Screens/ProductOverviewScreen.dart';
-import 'package:provider/provider.dart';
 
 import 'CounterWidget.dart';
 
@@ -10,10 +8,8 @@ class ReUsableContainer extends StatelessWidget {
   String productname;
   String productimageurl;
   int productprice;
-  ReUsableContainer(
-      {required this.productname,
-      required this.productimageurl,
-      required this.productprice});
+  String proid;
+  ReUsableContainer({required this.productname,required this.productimageurl,required this.productprice,required this.proid});
 
   int temp = 1;
   bool ishome = true;
@@ -65,6 +61,7 @@ class ReUsableContainer extends StatelessWidget {
                             cartname: productname,
                             cartimage: productimageurl,
                             cartprice: productprice,
+                            cartid: proid,
                           ),
                         ],
                       )

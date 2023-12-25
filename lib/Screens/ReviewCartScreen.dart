@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_groceryapp/Constants/singlecontainer.dart';
+import 'package:flutter_groceryapp/Constants/ReviewCartContainer.dart';
 import 'package:provider/provider.dart';
 import '../Providers/ReviewCartProvider.dart';
-class ReviewCartScreen extends StatelessWidget {
+class ReviewCartScreen extends StatefulWidget {
   const ReviewCartScreen({super.key});
+
+  @override
+  State<ReviewCartScreen> createState() => _ReviewCartScreenState();
+}
+
+class _ReviewCartScreenState extends State<ReviewCartScreen> {
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final reviewcartprovider = Provider.of<ReviewCartProvider>(context,listen: false);
+    reviewcartprovider.FetchCartItems();
+  }
+
   @override
   Widget build(BuildContext context) {
     final reviewcartprovider = Provider.of<ReviewCartProvider>(context);
@@ -28,12 +43,18 @@ class ReviewCartScreen extends StatelessWidget {
         ):ListView.builder(
             itemCount: reviewcartprovider.cartlist.length,
             itemBuilder: (context,index){
-              return SingleContainer(issearchscreen: false,prodname:reviewcartprovider.cartlist[index].cartname,proprice:reviewcartprovider.cartlist[index].cartprice.toString(),proimage:reviewcartprovider.cartlist[index].cartimage);
-            })
+              print(reviewcartprovider.cartlist.length);
+              return ReviewCartContainer(
+                  cartimage: reviewcartprovider.cartlist[index].cartimage,
+                  cartname: reviewcartprovider.cartlist[index].cartname,
+                  cartprice: reviewcartprovider.cartlist[index].cartprice.toString(),
+                  cartquanity: reviewcartprovider.cartlist[index].cartquantity.toString(),
+                  cartid: reviewcartprovider.cartlist[index].cartid);
+            }),
       ),
       bottomNavigationBar: ListTile(
         title: Text("Total Amount",style: TextStyle(fontSize: 20),),
-        subtitle: Text("\$130.5",style: TextStyle(color: Colors.green,fontSize: 18),),
+        subtitle: Text("\$${reviewcartprovider.totalprice}",style: TextStyle(color: Colors.green,fontSize: 18),),
         trailing: Container(
           decoration: BoxDecoration(
             color: Colors.yellow,

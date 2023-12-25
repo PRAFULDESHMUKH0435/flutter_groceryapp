@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../Providers/ReviewCartProvider.dart';
+class ReviewCartContainer extends StatefulWidget {
 
-class SingleContainer extends StatelessWidget {
+  String cartimage;
+  String cartname;
+  String cartprice;
+  String cartquanity;
+  String cartid;
+  ReviewCartContainer({required this.cartimage,required this.cartname,required this.cartprice,required this.cartquanity,required this.cartid});
 
-   bool issearchscreen;
-   String prodname;
-   String proprice;
-   String proimage;
-   String proid;
-   SingleContainer({required this.issearchscreen, required this.prodname,required this.proprice,required this.proimage,required this.proid});
+  @override
+  State<ReviewCartContainer> createState() => _ReviewCartContainerState();
+}
 
+class _ReviewCartContainerState extends State<ReviewCartContainer> {
   @override
   Widget build(BuildContext context) {
     final reviewcartprovider = Provider.of<ReviewCartProvider>(context);
@@ -29,40 +34,21 @@ class SingleContainer extends StatelessWidget {
                 flex: 1,
                 child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Center(child: Image.network(proimage,height: 120,width: 80,)))),
+                    child: Center(child: Image.network(widget.cartimage,height: 120,width: 80,)))),
             Expanded(
               flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(prodname,style: TextStyle(fontSize: 22,color: Colors.black,fontWeight: FontWeight.bold),),
-                  Text("\$$proprice",style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),),
-                  issearchscreen? Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blueGrey,width: 2.0,),
-                        borderRadius: BorderRadius.all(Radius.circular(12.0))
-                    ),
-                    child:const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('52 Gram',style: TextStyle(fontSize: 18),),
-                        Icon(Icons.arrow_drop_down)
-                      ],
-                    ),
-                  )
-                      :
-                  Text('52 Gram',style: TextStyle(fontSize: 18),),
+                  Text(widget.cartname,style: TextStyle(fontSize: 22,color: Colors.black,fontWeight: FontWeight.bold),),
+                  Text(widget.cartprice,style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),),
+                  Text(widget.cartquanity,style: TextStyle(fontSize: 18),),
                 ],
               ),),
-            issearchscreen? Expanded(
-                flex: 1,
-                child: ElevatedButton(
-                  child: Text("+ ADD"),
-                  onPressed: (){},
-                )):Column(
+            Column(
               children: [
                 IconButton(onPressed: (){
-                  reviewcartprovider.OpenDialogBox(context,prodname,proid);
+                  reviewcartprovider.OpenDialogBox(context,widget.cartname,widget.cartid);
                 }, icon: Icon(Icons.delete)),
                 Container(
                   decoration: BoxDecoration(
@@ -73,7 +59,7 @@ class SingleContainer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(onPressed: (){}, icon: Icon(Icons.remove)),
-                      Text("1",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.yellow),),
+                      Text(widget.cartquanity,style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.yellow),),
                       IconButton(onPressed: (){}, icon: Icon(Icons.add)),
                     ],
                   ),

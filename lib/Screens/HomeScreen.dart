@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: productprovider.Herbsproductlist.map((e){
-                      return  ReUsableContainer(productname:e.productname,productimageurl: e.productimage,productprice: e.productprice);
+                      return  ReUsableContainer(productname:e.productname,productimageurl: e.productimage,productprice: e.productprice,proid:e.proid);
                     }).toList(),
                   ),
                 ),
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                    children: productprovider.Freshfruitslist.map((fruits){
-                     return  ReUsableContainer(productname: fruits.productname, productimageurl: fruits.productimage,productprice:fruits.productprice);
+                     return  ReUsableContainer(productname: fruits.productname, productimageurl: fruits.productimage,productprice:fruits.productprice,proid: fruits.proid);
                    }).toList(),
                   ),
                 ),
@@ -123,48 +123,3 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-//
-// Container(
-// height: 280,
-// width: 200,
-// margin: EdgeInsets.symmetric(horizontal: 8.0,vertical: 5.0),
-// decoration: const BoxDecoration(
-// borderRadius: BorderRadius.all(Radius.circular(12.0)),
-// color: Colors.white,
-// ),
-// child: Column(
-// children: [
-// Expanded(child: Image(image: NetworkImage(fruits.productimage),)),
-// Expanded(child: Column(
-// children: [
-// Text(fruits.productname,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-// Text('${fruits.productprice}\$ /50 Gram',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w400),),
-// Row(
-// mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-// children: [
-// Container(
-// decoration: const BoxDecoration(
-// color: Colors.transparent,
-// borderRadius: BorderRadius.all(Radius.circular(12.0))
-// ),
-// child: const Row(children: [
-// Text('50 Gram'),
-// Icon(Icons.arrow_drop_down)
-// ],),
-// ),
-// Container(
-// decoration: const BoxDecoration(
-// color: Colors.white70,
-// borderRadius: BorderRadius.all(Radius.circular(8.0))
-// ),
-// child: Row(children: [
-// IconButton(onPressed: (){}, icon: Icon(Icons.remove)),
-// Text('1'),
-// IconButton(onPressed: (){}, icon: Icon(Icons.add)),
-// ],),)
-// ],
-// )
-// ],))
-// ],
-// ),
-// );

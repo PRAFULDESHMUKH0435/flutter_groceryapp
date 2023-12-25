@@ -7,7 +7,8 @@ class CounterWidget extends StatefulWidget {
    String cartname;
    String cartimage;
    int cartprice ;
-   CounterWidget({required this.cartname,required this.cartimage,required this.cartprice});
+   String cartid;
+   CounterWidget({required this.cartname,required this.cartimage,required this.cartprice,required this.cartid});
 
   @override
   State<CounterWidget> createState() => _CounterWidgetState();
@@ -29,12 +30,13 @@ class _CounterWidgetState extends State<CounterWidget> {
                  setState(() {
                    isinitial=false;
                  });
-                 reviewcartprovider.AddItemToCart( CartModel(
-                     cartname: widget.cartname,
-                     cartid: "101",
-                     cartimage: widget.cartimage,
-                     cartprice: widget.cartprice,
-                     cartquantity: _count) );
+                 reviewcartprovider.AddItemToReviewCart(
+                   widget.cartname,
+                   widget.cartid,
+                   widget.cartimage,
+                   widget.cartprice,
+                   _count,
+                 );
                  print("QUANTITY IS $_count");
               },
            ),
@@ -64,12 +66,13 @@ class _CounterWidgetState extends State<CounterWidget> {
                         setState(() {
                           _count+=1;
                         });
-                        reviewcartprovider.AddItemToCart( CartModel(
-                            cartname: widget.cartname,
-                            cartid: "101",
-                            cartimage: widget.cartimage,
-                            cartprice: widget.cartprice,
-                            cartquantity: _count) );
+                        reviewcartprovider.AddItemToReviewCart(
+                            widget.cartname,
+                            widget.cartid,
+                            widget.cartimage,
+                            widget.cartprice,
+                            _count,
+                        );
                         print("QUANTITY IS $_count");
                       },
                       icon: Icon(Icons.add)),

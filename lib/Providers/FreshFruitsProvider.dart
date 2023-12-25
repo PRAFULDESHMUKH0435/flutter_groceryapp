@@ -12,7 +12,8 @@ class FreshFruitsProvider with ChangeNotifier{
       FreshFruitsModel _freshfuitsmodel = FreshFruitsModel(
           productimage: element.get("productimage"),
           productname: element.get("productname"),
-          productprice: element.get("productprice")
+          productprice: element.get("productprice"),
+          proid: element.get("proid"),
       );
       freshfruits.add(_freshfuitsmodel);
       print("DATA $freshfruits");
