@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Providers/WishListProvider.dart';
 
-class SingleWishListItem extends StatelessWidget {
+class SingleWishListItem extends StatefulWidget {
   String prodname;
   String proimage;
   int proprice;
+  String proid;
   SingleWishListItem(
-      {required this.prodname, required this.proimage, required this.proprice});
+      {required this.prodname, required this.proimage, required this.proprice,required this.proid});
 
+  @override
+  State<SingleWishListItem> createState() => _SingleWishListItemState();
+}
 
+class _SingleWishListItemState extends State<SingleWishListItem> {
   @override
   Widget build(BuildContext context) {
     final wishlistprovider = Provider.of<WishListProvider>(context);
@@ -34,11 +39,11 @@ class SingleWishListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  prodname,
+                  widget.prodname,
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "\$$proprice",
+                  "\$${widget.proprice}",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                 ),
               ],
@@ -50,7 +55,14 @@ class SingleWishListItem extends StatelessWidget {
                   Icons.favorite,
                   color: Colors.red,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  wishlistprovider.temp.remove(widget.proid);
+                  wishlistprovider.RemoveItemFromWishlist(widget.proid);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${widget.prodname} Removed From  Wishlist")));
+                  setState(() {
+                    wishlistprovider.iswishlisted=false;
+                  });
+                },
               ))
         ],
       ),

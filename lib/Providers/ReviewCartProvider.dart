@@ -22,8 +22,6 @@ class ReviewCartProvider with ChangeNotifier{
 
    }
 
-
-   
    FetchCartItems() async{
      List<CartModel> templist=[];
      final ref = await FirebaseFirestore.instance.collection("CartItems").doc("Test").collection("MyCart").get();
@@ -43,12 +41,10 @@ class ReviewCartProvider with ChangeNotifier{
      notifyListeners();
    }
 
-
-
-
    DeletItemFromCart(String itemid) async{
      final ref =await FirebaseFirestore.instance.collection("CartItems").doc("Test").collection("MyCart").doc(itemid)
          .delete();
+     notifyListeners();
    }
 
    OpenDialogBox(BuildContext context,String itemname,String id){

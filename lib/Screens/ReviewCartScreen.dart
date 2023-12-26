@@ -16,6 +16,7 @@ class _ReviewCartScreenState extends State<ReviewCartScreen> {
     // TODO: implement initState
     super.initState();
     final reviewcartprovider = Provider.of<ReviewCartProvider>(context,listen: false);
+    reviewcartprovider.totalprice=0;
     reviewcartprovider.FetchCartItems();
   }
 

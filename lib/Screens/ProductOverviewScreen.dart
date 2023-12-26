@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Providers/WishListProvider.dart';
+import 'package:flutter_groceryapp/Screens/WishListScreen.dart';
 import 'package:provider/provider.dart';
 class ProductOverViewScreen extends StatefulWidget {
   String productname;
   String productimageurl;
   int productprice;
-  ProductOverViewScreen({required this.productname,required this.productimageurl,required this.productprice});
+  String productid;
+  ProductOverViewScreen({required this.productname,required this.productimageurl,required this.productprice,required this.productid});
 
   @override
   State<ProductOverViewScreen> createState() => _ProductOverViewScreenState();
@@ -13,6 +15,7 @@ class ProductOverViewScreen extends StatefulWidget {
 
 class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
   String defaultvalue = 'Basil';
+
   @override
   Widget build(BuildContext context) {
     final wishlistprovider = Provider.of<WishListProvider>(context);
@@ -21,6 +24,11 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
       appBar: AppBar(
         title: Text("Product OverView "),
         backgroundColor: Colors.yellow,
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>WishListScreen()));
+    }, icon: Icon(Icons.favorite_outlined)),
+        ],
       ),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 8.0),
@@ -52,8 +60,21 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
             Expanded(
               child: InkWell(
                 onTap: (){
-                  wishlistprovider.AddItemToWishList(widget.productname,widget.productimageurl,widget.productprice);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${widget.productname} Added To Wishlist")));
+                  setState(() {
+                    wishlistprovider.iswishlisted=true;
+                  });
+                  if(!wishlistprovider.temp.contains(widget.productid)){
+                    wishlistprovider.temp.add(widget.productid);
+                    wishlistprovider.AddItemToWishList(widget.productname,widget.productimageurl,widget.productprice,widget.productid);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${widget.productname} Added To Wishlist")));
+                  }else{
+                    setState(() {
+                      wishlistprovider.iswishlisted=false;
+                    });
+                    wishlistprovider.temp.remove(widget.productid);
+                    wishlistprovider.RemoveItemFromWishlist(widget.productid);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${widget.productname} Removed From  Wishlist")));
+                  }
                 },
                 child: Container(
                   height: 50,
@@ -63,7 +84,7 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                    Icon(Icons.favorite_outline,color: Colors.white70,),
+                      wishlistprovider.iswishlisted ? Icon(Icons.favorite_outlined,color: Colors.red):Icon(Icons.favorite_outline,color: Colors.white70,),
                     SizedBox(width: 5,),
                     Text('Add To WishList',style: TextStyle(color: Colors.white70,fontSize: 20,fontWeight: FontWeight.bold),)
                   ],),

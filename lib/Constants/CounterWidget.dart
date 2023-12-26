@@ -52,11 +52,19 @@ class _CounterWidgetState extends State<CounterWidget> {
                         onPressed: () {
                           if(_count==1){
                             setState(() {isinitial=true;});
+                            reviewcartprovider.DeletItemFromCart(widget.cartid);
                           }
                           if(_count>1){
                            setState(() {
                              _count-=1;
                            });
+                           reviewcartprovider.AddItemToReviewCart(
+                             widget.cartname,
+                             widget.cartid,
+                             widget.cartimage,
+                             widget.cartprice,
+                             _count,
+                           );
                           }
                         },
                         icon: Icon(Icons.remove)),

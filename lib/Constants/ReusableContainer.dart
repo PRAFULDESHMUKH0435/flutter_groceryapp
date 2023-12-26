@@ -24,6 +24,7 @@ class ReUsableContainer extends StatelessWidget {
                       productname: productname,
                       productimageurl: productimageurl,
                       productprice: productprice,
+                      productid: proid,
                     )));
            },
       child: Container(
