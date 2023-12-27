@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Constants/ReviewCartContainer.dart';
+import 'package:flutter_groceryapp/Screens/DeliveryDetailsScreen.dart';
 import 'package:provider/provider.dart';
 import '../Providers/ReviewCartProvider.dart';
 class ReviewCartScreen extends StatefulWidget {
@@ -63,7 +64,9 @@ class _ReviewCartScreenState extends State<ReviewCartScreen> {
           ),
           child: MaterialButton(
             child: Text("Checkout",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
-            onPressed: (){},
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>DeliveryDetailsScreen()));
+            },
           ),
         ),
       ),

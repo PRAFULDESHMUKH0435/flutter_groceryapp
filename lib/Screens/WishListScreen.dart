@@ -21,7 +21,7 @@ class _WishListScreenState extends State<WishListScreen> {
       body:wishlistprovider.wishlistitems.length==0?
       Center(
         child: Container(
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(image: NetworkImage('https://xplore.prayagrajxport.com/front_assets/images/empty_wishlist.png')),
@@ -39,7 +39,7 @@ class _WishListScreenState extends State<WishListScreen> {
                 return Container(
                   margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
                   height: 120,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(14.0)),
                     color: Colors.grey,
                   ),
