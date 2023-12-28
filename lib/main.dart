@@ -8,6 +8,7 @@ import 'package:flutter_groceryapp/Screens/AddDeliveryAddress.dart';
 import 'package:flutter_groceryapp/Screens/DeliveryDetailsScreen.dart';
 import 'package:flutter_groceryapp/Screens/HomeScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_groceryapp/Screens/PaymentSummary.dart';
 import 'package:provider/provider.dart';
 
 Future main() async{
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         ],
     child:  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: PaymentSummary(),
     ),);
   }
 }
