@@ -50,11 +50,13 @@ class DeliveryDetailsScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.yellow,
-        onPressed: (){},
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDeliveryAddress()));
+        },
       ),
       bottomNavigationBar: InkWell(
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDeliveryAddress()));
+
         },
         child: Container(
           height: 50,
@@ -63,7 +65,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(34.0)),
             color: Colors.yellow
           ),
-          child: Center(child: Text("Add New Address",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.center)),
+          child: Center(child: Text("Proceed To Pay",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.center)),
         ),
       ),
     );
