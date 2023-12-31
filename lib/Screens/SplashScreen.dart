@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_groceryapp/Screens/LoginScreen.dart';
 import 'package:flutter_groceryapp/Constants/constant.dart';
+import 'package:flutter_groceryapp/Services/FirebaseServices.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -17,9 +16,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-    });
+    FirebaseServices fservice = FirebaseServices();
+    fservice.CheckUserIsAlreadyLoggedInornot(context);
   }
 
   @override

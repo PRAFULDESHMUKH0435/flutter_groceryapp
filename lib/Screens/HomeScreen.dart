@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Constants/MyDrawer2.dart';
 import 'package:flutter_groceryapp/Constants/ReusableContainer.dart';
 import 'package:flutter_groceryapp/Constants/constant.dart';
 import 'package:flutter_groceryapp/Providers/HerbsProductProvider.dart';
@@ -51,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       ///DRAWER
-      drawer: MyDrawer(),
+      drawer: MyDrawer2(),
       /// BODY
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,

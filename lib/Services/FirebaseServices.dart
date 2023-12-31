@@ -1,0 +1,44 @@
+import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Screens/HomeScreen.dart';
+import 'package:flutter_groceryapp/Screens/LoginScreen.dart';
+
+class FirebaseServices{
+
+  void CheckUserIsAlreadyLoggedInornot(BuildContext context) async{
+
+    final user =await FirebaseAuth.instance.currentUser;
+    print("USer Is $user");
+    if(user==null){
+      Timer(Duration(seconds: 5), () {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+      });
+    }else{
+      Timer(Duration(seconds: 5), () {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+      });
+    }
+  }
+
+
+  static void SaveUserData(User user) async{
+    final ref =await FirebaseFirestore.instance.collection("Users").doc(user.uid);
+    Map<String,dynamic> usermodel = {
+      "UserName":user.displayName.toString(),
+      "UserEmail":user.email.toString(),
+      "UserPhone":user.phoneNumber.toString(),
+      "UserUid":user.uid.toString(),
+      "UserPhotoUrl":user.photoURL.toString(),
+    };
+    ref.set(usermodel)
+      .then((value){
+        print("USER DATA SAVED IS ${user}");
+    }).onError((error, stackTrace){
+        print("ERROR OCCURED ${error.toString()}");
+    });
+
+  }
+}

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Services/GoogleSignIn.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.orange,
       body: Container(
@@ -42,7 +44,9 @@ class LoginScreen extends StatelessWidget {
                     SignInButton(
                       Buttons.Google,
                       text: "Sign up with Google",
-                      onPressed: () {},
+                      onPressed: () {
+                        Authentication.signInWithGoogle(context: context);
+                      },
                     ),
 
                   ],
