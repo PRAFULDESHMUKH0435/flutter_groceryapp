@@ -13,26 +13,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       drawer: MyDrawer(),
       appBar: AppBar(title: Text("Profile"),backgroundColor: Colors.yellow,),
-      body: Stack(
+      body: Column(
         children: [
-          Column(
-            children: [
-              Container(
-                height: 120,
-                color: Colors.yellow,
-              ),
-            ],
+          CircleAvatar(
+            radius: 50,
+            backgroundImage: NetworkImage('https://cdn4.iconfinder.com/data/icons/business-conceptual-part1-1/513/business-man-512.png'),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 30,top: 70),
-            child: CircleAvatar(
-              backgroundColor: Colors.yellow,
-              radius: 50,
-              backgroundImage: NetworkImage('https://www.pngitem.com/pimgs/m/404-4042710_circle-profile-picture-png-transparent-png.png'),
-            ),
-          )
+          ListTile(
+            title: Text("Praful Deshmukh"),
+            leading: Icon(Icons.person_outline),
+          ),
+          ListTile(
+            title: Text("prafuldeshmukh068@gmail.com"),
+            leading: Icon(Icons.email_outlined),
+          ),
+          ListTile(
+            title: Text("+919359407730"),
+            leading: Icon(Icons.phone_outlined),
+          ),
+          ListTile(
+            title: Text("78 Ambika Nagar Narsala Road Nagpur 440034"),
+            leading: Icon(Icons.person_outline),
+          ),
         ],
-      ),
+      )
     );
   }
 }

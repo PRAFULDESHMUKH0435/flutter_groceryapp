@@ -9,7 +9,6 @@ class ReviewCartProvider with ChangeNotifier{
    double totalprice = 0.0;
    AddItemToReviewCart(String proname,String proid,String proimage,int proprice,int count) async{
      Random random = new Random();
-     int num = random.nextInt(60)+1;
      final ref =await FirebaseFirestore.instance.collection("CartItems").doc("Test").collection("MyCart").doc(proid).set(
        {
          "proid":proid,
@@ -59,6 +58,7 @@ class ReviewCartProvider with ChangeNotifier{
                    print(cartlist.length);
                    DeletItemFromCart(id);
                    FetchCartItems();
+                   totalprice;
                    Navigator.of(context).pop(true);
                  }, child: Text("Yes")),
                ],

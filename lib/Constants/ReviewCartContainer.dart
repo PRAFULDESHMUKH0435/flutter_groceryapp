@@ -58,7 +58,9 @@ class _ReviewCartContainerState extends State<ReviewCartContainer> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      IconButton(onPressed: (){}, icon: Icon(Icons.remove)),
+                      IconButton(onPressed: (){
+
+                      }, icon: Icon(Icons.remove)),
                       Text(widget.cartquanity,style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.yellow),),
                       IconButton(onPressed: (){}, icon: Icon(Icons.add)),
                     ],

@@ -1,28 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Screens/ProfileScreen.dart';
 class MyDrawer2 extends StatelessWidget {
   const MyDrawer2({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return  Drawer(
       backgroundColor: Colors.yellow,
       child: Column(
         children: [
           DrawerHeader(child: Row(
             children: [
-              CircleAvatar(backgroundImage: NetworkImage(''),),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Praful"),
-                  Text("prafuldeshmukh068@gmail.com")
-              ],)
+              Expanded(
+                  flex:1,
+                  child: CircleAvatar(backgroundImage: NetworkImage('https://clipart-library.com/image_gallery2/Man-PNG-File.png'),)),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Praful"),
+                    Text("prafuldeshmukh068@gmail.com")
+                ],),
+              )
              ],)),
           Column(
             children: [
               ListTile(
                 title: Text("Home"),
                 leading: Icon(Icons.home_outlined),
+              ),
+              ListTile(
+                title: Text("Profile"),
+                leading: Icon(Icons.person_outline),
+                onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen())),
               ),
               ListTile(
                 title: Text("About"),

@@ -16,7 +16,7 @@ class MyDrawer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const CircleAvatar(
-                radius: 45,
+                radius: 80,
                 backgroundColor: Colors.white70,
                 child: CircleAvatar(
                   radius: 40,

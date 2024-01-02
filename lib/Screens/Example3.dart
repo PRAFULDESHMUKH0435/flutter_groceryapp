@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-class TabbarView1 extends StatelessWidget {
-  const TabbarView1({super.key});
+class EXAMPLE3 extends StatelessWidget {
+  const EXAMPLE3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,30 +10,24 @@ class TabbarView1 extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.green,
-            title: Text("Tabbar Practise"),
-            actions: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.menu))
-            ],
-            // centerTitle: true,
+            title: Text("WhatsApp"),
             bottom: TabBar(
-              indicatorColor: Colors.white70,
               tabs: [
                 Tab(child: Icon(Icons.camera),),
                 Tab(child: Text("Chats")),
-                Text("Status"),
-                Text("Call"),
+                Tab(child: Text("Status")),
+                Tab(child: Text("Call")),
               ],
             ),
           ),
 
           body: TabBarView(
               children: [
-                Center(child: Text("Screen 1")),
-                Center(child: Text("Screen 2")),
-                Center(child: Text("Screen 3")),
-                Center(child: Text("Screen 4")),
-              ]
-          ),
+                Tab(child: Text("Screen 1"),),
+                Tab(child: Text("Screen 2"),),
+                Tab(child: Text("Screen 3"),),
+                Tab(child: Text("Screen 4"),),
+          ]),
 
           floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.green,
@@ -41,8 +35,5 @@ class TabbarView1 extends StatelessWidget {
             onPressed: (){},
           ),
         ));
-
-
-
   }
 }
