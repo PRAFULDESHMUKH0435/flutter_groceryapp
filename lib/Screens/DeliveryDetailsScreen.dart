@@ -1,10 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Screens/AddDeliveryAddress.dart';
+import 'package:flutter_groceryapp/Services/FirebaseServices.dart';
+
+import '../Constants/DeliveryTile.dart';
 class DeliveryDetailsScreen extends StatelessWidget {
-  const DeliveryDetailsScreen({super.key});
+   DeliveryDetailsScreen({super.key});
+   FirebaseServices services = FirebaseServices();
 
   @override
   Widget build(BuildContext context) {
+    print("LENGTH IS");
+    print(services.checkcount());
     return Scaffold(
       appBar: AppBar(
         title: Text("Delivery Page"),
@@ -18,32 +25,35 @@ class DeliveryDetailsScreen extends StatelessWidget {
               title: Text("Deliver To",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
             ),
             Divider(height: 10),
+            FirebaseServices.count==0?
             Container(
-              height: 120,
-              color: Colors.grey,
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Radio(value: "praful", groupValue: "praful", onChanged: (newvalue){}),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                        Text("Praful Deshmukh",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),),
-                        SizedBox(width: 50,),
-                        Chip(label: Text("Home"),backgroundColor: Colors.yellow,)
-                      ],),
-                      Text("78 Ambika Nagar Narsala Road Nagpur,440034",style: TextStyle(fontSize: 14)),
-                      Text("+919359407730",style: TextStyle(fontSize: 14),)
-                    ],
-                  ),
-
-                ],
+              height: 200,
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: 8.0),
+              decoration: BoxDecoration(
+                color: Colors.yellow,
+                borderRadius: BorderRadius.all(Radius.circular(14.0))
               ),
-            )
+              child: Center(child: Text("Address Is Not Selected",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),)
+                : Expanded(
+              child: StreamBuilder(
+                stream:   FirebaseFirestore.instance.collection("Address").snapshots(),
+                builder: (context,snapshot){
+                  return ListView.builder(
+                      itemCount: snapshot.data!.size,
+                      itemBuilder: (context,index){
+                        String fullname = snapshot.data!.docs[index]['FirstName']+snapshot.data!.docs[index]['LastName'];
+                        String address = snapshot.data!.docs[index]['Society'] +snapshot.data!.docs[index]['Street'] +snapshot.data!.docs[index]['Area'] +snapshot.data!.docs[index]['City'];
+                        return DeliveryTile(
+                            ID: snapshot.data!.docs[index]['ID'],
+                            username: fullname,
+                            address: address,
+                            phone: snapshot.data!.docs[index]['MobileNumber']);
+                      }
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

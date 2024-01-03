@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Constants/SingleWishListItem.dart';
 import '../Providers/WishListProvider.dart';
 class WishListScreen extends StatefulWidget {
   const WishListScreen({super.key});
@@ -80,7 +79,6 @@ class _WishListScreenState extends State<WishListScreen> {
                               wishlistprovider.RemoveItemFromWishlist(wishlistprovider.wishlistitems[index].proid);
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${wishlistprovider.wishlistitems[index].productname} Removed From  Wishlist")));
                               setState(() {
-                                wishlistprovider.iswishlisted=false;
                               });
                             },
                           ))

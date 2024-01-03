@@ -7,6 +7,7 @@ import '../Models/HerbsProductModel.dart';
 class SearchItemScreen extends StatefulWidget {
   List<HerbsProductModel> searchitemslist =[];
   SearchItemScreen({required this.searchitemslist});
+  String query ="";
 
   @override
   State<SearchItemScreen> createState() => _SearchItemScreenState();
@@ -16,7 +17,6 @@ class _SearchItemScreenState extends State<SearchItemScreen> {
   @override
   Widget build(BuildContext context) {
     print("SEARCH ITEMS BUILD METHOD CALLED");
-    final searchprovider = Provider.of<HerbsProductProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xffcbcbcb),
       appBar: AppBar(
@@ -39,8 +39,14 @@ class _SearchItemScreenState extends State<SearchItemScreen> {
               child: TextField(
                 onChanged: (newvalue){
                   setState(() {
-                    searchprovider.SearchProducts(newvalue,widget.searchitemslist);
-                    widget.searchitemslist=searchprovider.updatedsearchlist;
+                    // searchprovider.SearchProducts(newvalue,widget.searchitemslist);
+                    // widget.searchitemslist=searchprovider.updatedsearchlist;
+                    //
+                    widget.query=newvalue;
+                    List<HerbsProductModel> updatedlist = widget.searchitemslist.where((element){
+                      return element.productname.toLowerCase().contains(widget.query.toLowerCase());
+                    }).toList();
+                    widget.searchitemslist=updatedlist;
                   });
                 },
                 decoration: InputDecoration(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Models/AddressModel.dart';
+import 'package:flutter_groceryapp/Services/FirebaseServices.dart';
 
 class AddDeliveryAddress extends StatefulWidget {
   const AddDeliveryAddress({super.key});
@@ -8,6 +10,8 @@ class AddDeliveryAddress extends StatefulWidget {
 }
 
 class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
+
+  FirebaseServices services = FirebaseServices();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final _firstnamecontroller = TextEditingController();
   final _lastnamecontroller = TextEditingController();
@@ -252,6 +256,36 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
       bottomNavigationBar: InkWell(
         onTap: (){
           if(_formkey.currentState!.validate()){
+            services.checkcount();
+            print(FirebaseServices.count);
+            if(FirebaseServices.count<3){
+              String ID = DateTime.now().millisecondsSinceEpoch.toString();
+              services.AddUserAddressToDB(AddressModel(
+                ID: ID,
+                FirstName:  _firstnamecontroller.text.toString(),
+                LastName: _lastnamecontroller.text.toString(),
+                MobileNumber: _mobilenocontroller.text.toString(),
+                AlterNateMobileNumber: _altmobnocontroller.text.toString(),
+                Society: _societycontroller.text.toString(),
+                Street: _streetcontroller.text.toString(),
+                Landmark: _landmarkcontroller.text.toString(),
+                City: _citycontroller.text.toString(),
+                Area: _areacontroller.text.toString(),
+                PinCode: _pincodecontroller.text.toString(),
+              ),context);
+              _firstnamecontroller.clear();
+              _lastnamecontroller.clear();
+              _mobilenocontroller.clear();
+              _altmobnocontroller.clear();
+              _societycontroller.clear();
+              _streetcontroller.clear();
+              _landmarkcontroller.clear();
+              _citycontroller.clear();
+              _areacontroller.clear();
+              _pincodecontroller.clear();
+            }else{
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("At Max 3 Address Can Be Saved Only")));
+            }
 
           }else{
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("All Fields Are Mandatory")));

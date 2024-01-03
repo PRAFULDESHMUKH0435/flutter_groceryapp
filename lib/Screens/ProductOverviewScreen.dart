@@ -84,7 +84,7 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      wishlistprovider.iswishlisted ? Icon(Icons.favorite_outlined,color: Colors.red):Icon(Icons.favorite_outline,color: Colors.white70,),
+                      wishlistprovider.temp.contains(widget.productid) ? Icon(Icons.favorite_outlined,color: Colors.red):Icon(Icons.favorite_outline,color: Colors.white70,),
                     SizedBox(width: 5,),
                     Text('Add To WishList',style: TextStyle(color: Colors.white70,fontSize: 20,fontWeight: FontWeight.bold),)
                   ],),

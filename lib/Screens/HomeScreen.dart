@@ -5,9 +5,9 @@ import 'package:flutter_groceryapp/Constants/constant.dart';
 import 'package:flutter_groceryapp/Providers/HerbsProductProvider.dart';
 import 'package:flutter_groceryapp/Screens/ReviewCartScreen.dart';
 import 'package:flutter_groceryapp/Screens/SearchItemScreen.dart';
+import 'package:flutter_groceryapp/Services/FirebaseServices.dart';
 import 'package:provider/provider.dart';
 import '../Constants/Banner.dart';
-import '../Constants/MyDrawer.dart';
 
 class HomeScreen extends StatefulWidget {
    HomeScreen({super.key});
@@ -17,6 +17,8 @@ class HomeScreen extends StatefulWidget {
 }
 class _HomeScreenState extends State<HomeScreen> {
 
+  FirebaseServices services = FirebaseServices();
+  
   @override
   void initState() {
     final productprovider = Provider.of<HerbsProductProvider>(context,listen: false);
@@ -29,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final productprovider=Provider.of<HerbsProductProvider>(context);
     print("BUILD FUNCTION EXECUTED");
+
     return Scaffold(
       backgroundColor: Color(0xffcbcbcb),
       ///APPBAR

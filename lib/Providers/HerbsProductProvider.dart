@@ -44,6 +44,14 @@ class HerbsProductProvider with ChangeNotifier{
     List<HerbsProductModel> SearchProducts(String val,List<HerbsProductModel> list){
        print("Executing");
        print(list.length);
+       for(int i=0;i<list.length;i++){
+         if(list[i].productname.toLowerCase().contains(val.toLowerCase())){
+           print(list.length);
+           updatedsearchlist.add(list[i]);
+           break;
+         }
+       }
+       notifyListeners();
        return updatedsearchlist;
     }
 
