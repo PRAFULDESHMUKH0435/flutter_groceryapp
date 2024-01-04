@@ -4,7 +4,8 @@ class DeliveryTile extends StatefulWidget {
   String address;
   String phone;
   String ID;
-   DeliveryTile({required this.username,required this.address,required this.phone,required this.ID});
+  String deladdresstype;
+   DeliveryTile({required this.username,required this.address,required this.phone,required this.ID,required this.deladdresstype});
 
   @override
   State<DeliveryTile> createState() => _DeliveryTileState();
@@ -50,7 +51,7 @@ class _DeliveryTileState extends State<DeliveryTile> {
                   children: [
                     Text(widget.username,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),),
                     SizedBox(width: 50,),
-                    Chip(label: Text("Home"),backgroundColor: Colors.yellow,)
+                    Chip(label: Text(widget.deladdresstype),backgroundColor: Colors.yellow,)
                   ],),
                 Text(widget.address,style: TextStyle(fontSize: 14)),
                 Text(widget.phone,style: TextStyle(fontSize: 14),)

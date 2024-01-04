@@ -44,10 +44,12 @@ class DeliveryDetailsScreen extends StatelessWidget {
                       itemBuilder: (context,index){
                         String fullname = snapshot.data!.docs[index]['FirstName']+snapshot.data!.docs[index]['LastName'];
                         String address = snapshot.data!.docs[index]['Society'] +snapshot.data!.docs[index]['Street'] +snapshot.data!.docs[index]['Area'] +snapshot.data!.docs[index]['City'];
+                        String deliveryaddtype = snapshot.data!.docs[index]['DeliveryAddressType'];
                         return DeliveryTile(
                             ID: snapshot.data!.docs[index]['ID'],
                             username: fullname,
                             address: address,
+                            deladdresstype: deliveryaddtype,
                             phone: snapshot.data!.docs[index]['MobileNumber']);
                       }
                   );
