@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_groceryapp/Constants/MyDrawer.dart';
+import 'package:flutter_groceryapp/Constants/MyDrawer2.dart';
 import 'package:flutter_groceryapp/Providers/ProfileProvider.dart';
 import 'package:provider/provider.dart';
 class ProfileScreen extends StatefulWidget {
@@ -12,20 +12,14 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
 
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    final profile = Provider.of<ProfileProvider>(context,listen: false);
-    profile.FetchUserDetails();
-  }
+
 
   @override
   Widget build(BuildContext context) {
     final profile = Provider.of<ProfileProvider>(context);
     profile.FetchUserDetails();
     return Scaffold(
-      drawer: MyDrawer(),
+      drawer: MyDrawer2(),
       appBar: AppBar(title: Text("Profile"),backgroundColor: Colors.yellow,),
       body: Column(
         children: [
@@ -38,15 +32,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             leading: Icon(Icons.person_outline),
           ),
           ListTile(
-            title: Text("prafuldeshmukh068@gmail.com"),
+            title: Text(profile.useremail),
             leading: Icon(Icons.email_outlined),
           ),
           ListTile(
-            title: Text("+919359407730"),
+            title: Text(profile.userphonephonenumber),
             leading: Icon(Icons.phone_outlined),
           ),
           ListTile(
-            title: Text("78 Ambika Nagar Narsala Road Nagpur 440034"),
+            title: Text(profile.useruid),
             leading: Icon(Icons.person_outline),
           ),
         ],

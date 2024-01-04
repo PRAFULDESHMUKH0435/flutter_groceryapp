@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Providers/ProfileProvider.dart';
 import 'package:flutter_groceryapp/Screens/ProfileScreen.dart';
+import 'package:provider/provider.dart';
 class MyDrawer2 extends StatelessWidget {
   const MyDrawer2({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final proprovider = Provider.of<ProfileProvider>(context);
     return  Drawer(
       backgroundColor: Colors.yellow,
       child: Column(
@@ -13,14 +16,16 @@ class MyDrawer2 extends StatelessWidget {
             children: [
               Expanded(
                   flex:1,
-                  child: CircleAvatar(backgroundImage: NetworkImage('https://clipart-library.com/image_gallery2/Man-PNG-File.png'),)),
+                  child: CircleAvatar(
+                    radius: 40,
+                    backgroundImage: NetworkImage(proprovider.userphotourl),)),
               Expanded(
                 flex: 2,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Praful"),
-                    Text("prafuldeshmukh068@gmail.com")
+                    Text(proprovider.username),
+                    Text(proprovider.useremail)
                 ],),
               )
              ],)),

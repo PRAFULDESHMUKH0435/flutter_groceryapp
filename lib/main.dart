@@ -6,7 +6,7 @@ import 'package:flutter_groceryapp/Providers/FreshFruitsProvider.dart';
 import 'package:flutter_groceryapp/Providers/HerbsProductProvider.dart';
 import 'package:flutter_groceryapp/Providers/WishListProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_groceryapp/Screens/SplashScreen.dart';
+import 'package:flutter_groceryapp/Screens/HomeScreen.dart';
 import 'package:provider/provider.dart';
 
 Future main() async{
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         ],
     child:  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: HomeScreen(),
     ),);
   }
 }

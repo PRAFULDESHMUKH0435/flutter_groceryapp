@@ -9,110 +9,108 @@ class Practise extends StatefulWidget {
 enum AccountType {Free,Paid,Premium}
 class _PractiseState extends State<Practise> {
   bool isselected = false;
+  bool isselected2 = false;
+  bool isselected3 = false;
+
+  String Person = "Praful";
 
   @override
   Widget build(BuildContext context) {
-    List<String> names=["Praful","Kailash","Harshal"];
-    String currval = names[0];
     print(AccountType.Premium.index);
     return Scaffold(
       backgroundColor: Colors.yellow,
-      body: Stack(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Container(
-          //   height: double.infinity,
-          //   color: Colors.grey,
-          //   alignment: Alignment.bottomCenter,
-          //   child:Row(
-          //     children: [
-          //       Expanded(child: Icon(Icons.home),flex: 2),
-          //       Expanded(child: Icon(Icons.home)),
+          // CheckboxListTile(
+          //   title: Text("Nagpur"),
+          //     value: isselected,
+          //     onChanged: (newval){
+          //       setState(() {
+          //         isselected=newval!;
+          //       });
+          //     }),
+          // CheckboxListTile (
+          //             title: Text("Pune"),
+          //               value: isselected2,
+          //               onChanged: (newval){
+          //                 setState(() {
+          //                   isselected2=newval!;
+          //                 });
+          //               }),
           //
-          //     ],
-          //   )
-          // ),
-          // Container(
-          //   height: MediaQuery.of(context).size.height*0.9,
-          //   decoration: BoxDecoration(
-          //     color: Colors.greenAccent,
-          //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(24.0),bottomRight: Radius.circular(24.0))
-          //   ),
-          // ),
-          // Container(
-          //   height: MediaQuery.of(context).size.height*0.3,
-          //   decoration: BoxDecoration(
-          //     color: Colors.purple,
-          //     borderRadius: BorderRadius.only(
-          //       bottomLeft: Radius.circular(20.0),
-          //       bottomRight: Radius.circular(20.0)
-          //     )
-          //   ),
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     children: [
-          //       Row(
-          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //         children: [
-          //           Icon(Icons.menu_outlined,color: Colors.white70,),
-          //           Icon(Icons.more_vert,color: Colors.white70,),
-          //         ],
-          //       ),
-          //       Row(
-          //         mainAxisAlignment: MainAxisAlignment.start,
-          //         children: [
-          //           Padding(
-          //
-          //               padding: EdgeInsets.symmetric(horizontal: 8.0),
-          //               child: Text("Welcome Back",style: TextStyle(fontSize: 25,color: Colors.white70),))
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // ),
-          // Positioned(
-          //     top: 180,
-          //     left: 16,
-          //     child: ClipRRect(
-          //       borderRadius: BorderRadius.circular(12.0),
-          //       child: Image.network('https://www.pngitem.com/pimgs/m/404-4042710_circle-profile-picture-png-transparent-png.png',scale: 3,width: 150.0,height: 150.0,),
-          //     )),
-          // Center(
-          //   child: Container(
-          //     child: ExpansionTile(
-          //       title: Text("Collapse"),
-          //       children: [
-          //         ListTile(
-          //           title: Text("Praful"),
-          //         ),
-          //         ListTile(
-          //           title: Text("Praful 1"),
-          //         ),
-          //         ListTile(
-          //           title: Text("Praful 1"),
-          //         ),
-          //         ListTile(
-          //           title: Text("Praful 1"),
-          //         ),
-          //         ListTile(
-          //           title: Text("Praful 1"),
-          //         ),
-          //         ListTile(
-          //           title: Text("Praful 1"),
-          //         ),
-          //
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          Positioned(
-            bottom: 50,
-            left: 50,
-            child: Container(
-              height: 140,
-              width: 140,
-              color: Colors.red,
-            ),
-          )
+          // RadioListTile(
+          //     title: Text("Begineer"),
+          //     value: "Begineer",
+          //     groupValue: level,
+          //     onChanged: (newvalue){
+          //       setState(() {
+          //         level=newvalue!;
+          //       });
+          //     }),
+          // RadioListTile(
+          //     title: Text("Intermediate"),
+          //     value: "Intermediate",
+          //     groupValue: level,
+          //     onChanged: (newvalue){
+          //       setState(() {
+          //         level=newvalue!;
+          //       });
+          //     })
+
+
+          CheckboxListTile(
+              title: Text("Delhi"),
+              value: isselected,
+              onChanged: (newvalue){
+                setState(() {
+                  isselected=newvalue!;
+                });
+              }),
+          CheckboxListTile(
+              title: Text("Haridwar"),
+              value: isselected2,
+              onChanged: (newvalue){
+                setState(() {
+                  isselected2=newvalue!;
+                });
+              }),
+          CheckboxListTile(
+              title: Text("Noida"),
+              value: isselected3,
+              onChanged: (newvalue){
+                setState(() {
+                  isselected3=newvalue!;
+                });
+              }),
+          RadioListTile(
+              title: Text("Praful"),
+              value: "Praful",
+              groupValue: Person,
+              onChanged: (newvalue){
+                setState(() {
+                  Person=newvalue!;
+                });
+              }),
+          RadioListTile(
+              title: Text("Kailash"),
+              value: "Kailash",
+              groupValue: Person,
+              onChanged: (newvalue){
+                setState(() {
+                  Person=newvalue!;
+                });
+              }),
+          RadioListTile(
+              title: Text("Harshal"),
+              value: "Harshal",
+              groupValue: Person,
+              onChanged: (newvalue){
+                setState(() {
+                  Person=newvalue!;
+                });
+              })
+
         ],
       ),
     );

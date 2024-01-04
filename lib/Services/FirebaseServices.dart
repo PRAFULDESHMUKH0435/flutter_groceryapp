@@ -65,6 +65,7 @@ class FirebaseServices{
       "Area":model.Area,
       "PinCode":model.PinCode,
       "ID":model.ID,
+      "DeliveryAddressType":model.deliveryaddresstype
     }).then((value){
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User Address Saved Successfully")));
     }).onError((error, stackTrace){

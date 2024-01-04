@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_groceryapp/Models/UserModel.dart';
 
 class ProfileProvider with ChangeNotifier{
-
 
    String username="";
    String useremail="";
@@ -13,14 +11,15 @@ class ProfileProvider with ChangeNotifier{
    String userphonephonenumber="";
 
   FetchUserDetails() async{
-    final ref = await FirebaseFirestore.instance.collection("Users");
-    ref.doc(FirebaseAuth.instance.currentUser!.uid).snapshots().forEach((element) {
-       UserModel(
-           username: element.get("UserName"),
-           useremail: element.get("UserEmail"),
-           useruid: element.get("UserUid"),
-           userphotourl: element.get("UserPhotoUrl"),
-           userphonephonenumber: element.get("UserPhone"));
-    });
+
+    final ref = await FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    username=ref.get("UserName");
+    useremail=ref.get("UserEmail");
+    useruid=ref.get("UserUid");
+    userphotourl=ref.get("UserPhotoUrl");
+    userphonephonenumber=ref.get("UserPhone");
+
+    print(username);
   }
 }

@@ -23,11 +23,13 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
   final _citycontroller = TextEditingController();
   final _areacontroller = TextEditingController();
   final _pincodecontroller = TextEditingController();
+  String deliveryaddresstype="Home";
 
   String? Namevalidator(value) {
     if (value!.isEmpty) {
       return "This Field Is Required";
     }
+    return null;
   }
 
   @override
@@ -230,6 +232,41 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                 ),
               ),
             ),
+
+            Container(
+              height: 150,
+              margin: EdgeInsets.symmetric(horizontal: 14.0,vertical: 5.0),
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.all(Radius.circular(14.0))
+              ),
+              child: Column(
+                children: [
+                  Text("Delivery Address Type",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                  RadioListTile(
+                      title: Text("Home"),
+                      value: "Home",
+                      controlAffinity: ListTileControlAffinity.trailing,
+                      groupValue: deliveryaddresstype,
+                      onChanged: (newvalue){
+                        setState(() {
+                          deliveryaddresstype=newvalue!;
+                        });
+                      }),
+                  RadioListTile(
+                      title: Text("Work"),
+                      value: "Work",
+                      controlAffinity: ListTileControlAffinity.trailing,
+                      groupValue: deliveryaddresstype,
+                      onChanged: (newvalue){
+                        setState(() {
+                          deliveryaddresstype=newvalue!;
+                        });
+                      }),
+                ],
+              ),
+            ),
+
             InkWell(
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
@@ -272,6 +309,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                 City: _citycontroller.text.toString(),
                 Area: _areacontroller.text.toString(),
                 PinCode: _pincodecontroller.text.toString(),
+                deliveryaddresstype: deliveryaddresstype
               ),context);
               _firstnamecontroller.clear();
               _lastnamecontroller.clear();

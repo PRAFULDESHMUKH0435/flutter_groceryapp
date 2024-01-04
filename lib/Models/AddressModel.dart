@@ -10,6 +10,7 @@ class AddressModel{
   String Area;
   String PinCode;
   String ID;
+  String deliveryaddresstype;
   AddressModel(
       {required this.FirstName,
         required this.LastName,
@@ -21,6 +22,7 @@ class AddressModel{
         required this.City,
         required this.Area,
         required this.ID,
+        required this.deliveryaddresstype,
         required this.PinCode,}
       );
 }
