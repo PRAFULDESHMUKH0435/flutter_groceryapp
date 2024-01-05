@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Constants/PaymentSummarySingleRow.dart';
 import 'package:flutter_groceryapp/Constants/singleitemexpansiontile.dart';
+import 'package:flutter_groceryapp/Providers/ReviewCartProvider.dart';
+import 'package:provider/provider.dart';
 class PaymentSummary extends StatefulWidget {
 
   @override
@@ -8,10 +10,12 @@ class PaymentSummary extends StatefulWidget {
 }
 
 class _PaymentSummaryState extends State<PaymentSummary> {
-  bool defaultval = true;
+  String paymentmode = "Cash On Delivery";
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ReviewCartProvider>(context,listen: false);
+    provider.SubTotal();
     return Scaffold(
       backgroundColor: Color(0xffcbcbcb),
       appBar: AppBar(
@@ -25,33 +29,45 @@ class _PaymentSummaryState extends State<PaymentSummary> {
             subtitle: Text("78,Ambika Nagar Narsala Road Nagpur ,440034",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w400)),
           ),
           Divider(height: 1,),
-          ExpansionTile(title: Text("order Items 6",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),children: [
-            ExpansionTileSingleItem(),
-            ExpansionTileSingleItem(),
-            ExpansionTileSingleItem(),
-            ExpansionTileSingleItem(),
-            ExpansionTileSingleItem(),
-            ExpansionTileSingleItem(),
-            ExpansionTileSingleItem(),
-          ],),
+          ExpansionTile(title: Text("order Items (${provider.cartlist.length})",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+            children: provider.cartlist.map((e){
+              return ExpansionTileSingleItem(
+                itemname: e.cartname,
+                itemprice: e.cartprice.toString(),
+                itemquantity: e.cartquantity,
+                itemproimage: e.cartimage,
+              );
+            }).toList(),),
           Divider(height: 1,color: Colors.black,),
-          PaymentSummarySingleContainer(title1: "Sub Total",title2: "\$200"),
+          PaymentSummarySingleContainer(title1: "Sub Total",title2: "${provider.totalamount}"),
           PaymentSummarySingleContainer(title1: "Shipping Charge",title2: "\$0"),
           PaymentSummarySingleContainer(title1: "Compen Discount",title2: "\$10"),
           Divider(height: 1,color: Colors.black,),
           Container(
-              margin: EdgeInsets.only(left: 12.0,top: 5.0),
-              child: Text("Payment Options",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),)),
-          RadioListTile(
-              value: defaultval,
-              groupValue: "Gropus",
-              title: Text("Home",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
-              secondary: Icon(Icons.home_outlined,size: 30),
-              onChanged: (newvalue){
-                setState(() {
-                  defaultval=!defaultval;
-                });
-              }),
+              margin: EdgeInsets.only(left: 12.0,top: 8.0),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Payment Options",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500),),
+                  RadioListTile(
+                      title: Text("Cash On Delivery",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+                      value: "Cash On Delivery",
+                      groupValue: paymentmode,
+                      onChanged: (newvalue){
+                        setState(() {
+                          paymentmode=newvalue!;
+                        });
+                      }),
+                  RadioListTile(
+                      title: Text("Online Payment",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+                      value: "Online",
+                      groupValue: paymentmode,
+                      onChanged: (newvalue){
+                        setState(() {
+                          paymentmode=newvalue!;
+                        });
+                      }),
+                ],
+              )),
 
         ],
       ),

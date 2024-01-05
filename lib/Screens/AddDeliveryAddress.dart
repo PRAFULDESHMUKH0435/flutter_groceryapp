@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Models/AddressModel.dart';
+import 'package:flutter_groceryapp/Services/CommonServices.dart';
 import 'package:flutter_groceryapp/Services/FirebaseServices.dart';
 
 class AddDeliveryAddress extends StatefulWidget {
@@ -24,6 +25,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
   final _areacontroller = TextEditingController();
   final _pincodecontroller = TextEditingController();
   String deliveryaddresstype="Home";
+  CommonServices commonServices = CommonServices();
 
   String? Namevalidator(value) {
     if (value!.isEmpty) {
@@ -268,6 +270,10 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
             ),
 
             InkWell(
+              onTap: (){
+                print("execute");
+                commonServices.GetCurrentUserLocation();
+              },
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
                 child: Row(

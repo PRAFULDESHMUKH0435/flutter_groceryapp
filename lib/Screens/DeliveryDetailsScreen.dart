@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Screens/AddDeliveryAddress.dart';
+import 'package:flutter_groceryapp/Screens/PaymentSummary.dart';
 import 'package:flutter_groceryapp/Services/FirebaseServices.dart';
 
 import '../Constants/DeliveryTile.dart';
@@ -68,7 +69,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
       ),
       bottomNavigationBar: InkWell(
         onTap: (){
-
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentSummary()));
         },
         child: Container(
           height: 50,
@@ -77,7 +78,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(34.0)),
             color: Colors.yellow
           ),
-          child: Center(child: Text("Proceed To Pay",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.center)),
+          child: Center(child: Text("Payment Summary",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.center)),
         ),
       ),
     );
