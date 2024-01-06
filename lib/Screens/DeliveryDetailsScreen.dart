@@ -17,6 +17,9 @@ class DeliveryDetailsScreen extends StatefulWidget {
 class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
    FirebaseServices services = FirebaseServices();
 
+   late String fullname;
+   late String address;
+
 
    @override
   void initState() {
@@ -67,8 +70,8 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                     return ListView.builder(
                         itemCount: snapshot.data!.size,
                         itemBuilder: (context,index){
-                          String fullname = snapshot.data!.docs[index]['FirstName']+snapshot.data!.docs[index]['LastName'];
-                          String address = snapshot.data!.docs[index]['Society'] +snapshot.data!.docs[index]['Street'] +snapshot.data!.docs[index]['Area'] +snapshot.data!.docs[index]['City'];
+                           fullname = snapshot.data!.docs[index]['FirstName']+" "+snapshot.data!.docs[index]['LastName'];
+                           address = snapshot.data!.docs[index]['Society'] +snapshot.data!.docs[index]['Street'] +snapshot.data!.docs[index]['Area'] +snapshot.data!.docs[index]['City'];
                           String deliveryaddtype = snapshot.data!.docs[index]['DeliveryAddressType'];
                           return DeliveryTile(
                               isselectedornot: snapshot.data!.docs[index]['isselected'],
@@ -95,7 +98,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
       ),
       bottomNavigationBar: InkWell(
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentSummary()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentSummary(fullname: fullname,address: address)));
         },
         child: Container(
           height: 50,

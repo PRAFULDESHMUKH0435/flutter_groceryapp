@@ -7,6 +7,9 @@ import 'package:provider/provider.dart';
 class PaymentSummary extends StatefulWidget {
   @override
   State<PaymentSummary> createState() => _PaymentSummaryState();
+  String fullname;
+  String address;
+  PaymentSummary({required this.address,required this.fullname});
 }
 
 class _PaymentSummaryState extends State<PaymentSummary> {
@@ -28,8 +31,8 @@ class _PaymentSummaryState extends State<PaymentSummary> {
       body: ListView(
         children: [
           ListTile(
-            title: Text("Praful Deshmukh",style: TextStyle(fontSize: 19,fontWeight: FontWeight.bold,color: Colors.black),),
-            subtitle: Text("78,Ambika Nagar Narsala Road Nagpur ,440034",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w400)),
+            title: Text(widget.fullname,style: TextStyle(fontSize: 19,fontWeight: FontWeight.bold,color: Colors.black),),
+            subtitle: Text(widget.address,style: TextStyle(fontSize: 17,fontWeight: FontWeight.w400)),
           ),
           Divider(height: 1,),
           ExpansionTile(title: Text("order Items (${provider.cartlist.length})",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
