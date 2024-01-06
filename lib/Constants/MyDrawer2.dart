@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Providers/ProfileProvider.dart';
+import 'package:flutter_groceryapp/Screens/ContactScreen.dart';
 import 'package:flutter_groceryapp/Screens/ProfileScreen.dart';
 import 'package:flutter_groceryapp/Screens/ReviewCartScreen.dart';
 import 'package:provider/provider.dart';
+
+import '../Screens/WishListScreen.dart';
 class MyDrawer2 extends StatelessWidget {
   const MyDrawer2({super.key});
 
@@ -53,10 +56,20 @@ class MyDrawer2 extends StatelessWidget {
               ListTile(
                 title: Text("Contact"),
                 leading: Icon(Icons.phone_outlined),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ContactScreen()));
+                },
               ),
               ListTile(
                 title: Text("Categories"),
                 leading: Icon(Icons.category_outlined),
+              ),
+              ListTile(
+                title: Text("WishList"),
+                leading: Icon(Icons.favorite_outline),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>WishListScreen()));
+                },
               ),
               ListTile(
                 title: Text("Cart"),

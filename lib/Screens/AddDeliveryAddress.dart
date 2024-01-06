@@ -305,9 +305,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
           if(_formkey.currentState!.validate()){
             services.checkcount();
             print("ADDRESS PROVIDER COUNT IS ${addressprovider.count}");
-            if(FirebaseServices.count<3){
               String ID = DateTime.now().millisecondsSinceEpoch.toString();
-
               addressprovider.AddUserAddressToDB(AddressModel(
                 ID: ID,
                 FirstName:  _firstnamecontroller.text.toString(),
@@ -334,10 +332,6 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
               _areacontroller.clear();
               _pincodecontroller.clear();
               print("ADDRESS PROVIDER COUNT IS ${addressprovider.count}");
-            }else{
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("At Max 3 Address Can Be Saved Only")));
-            }
-
           }else{
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("All Fields Are Mandatory")));
           }

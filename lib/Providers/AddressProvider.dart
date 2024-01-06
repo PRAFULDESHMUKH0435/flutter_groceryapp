@@ -1,49 +1,67 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/AddressModel.dart';
 
 class AddressProvider with ChangeNotifier{
-   int count = 0;
-   checkcount() async{
-    final ref = await FirebaseFirestore.instance.collection("Address").get();
-    count=ref.size;
-    notifyListeners();
-  }
+    int count = 0;
+    String username="";
+    String useraddress="";
+    String mobilenumber="";
+    static String alternatemobilenumber="";
+    static String DeliveryAddressType ="";
 
-   DisableRemainingAddresses() async{
-    final ref = await FirebaseFirestore.instance.collection("Address").get();
-   }
+    GetAddressCount() async{
+      final ref = await FirebaseFirestore.instance.collection("Address").get();
+      count=ref.size;
+      print("Hi $count");
+    }
+
+
+    GetAddress() async{
+      final ref = await FirebaseFirestore.instance.collection("Address").get();
+      ref.docs.forEach((element) { 
+        username = element.get("Full Name");
+        useraddress = element.get("Address");
+        mobilenumber = element.get("MobileNumber");
+        alternatemobilenumber = element.get("AlterMobile");
+        DeliveryAddressType = element.get("DeliveryAddressType");
+      });
+      print("GETADDRESS LOADED");
+    }
 
    AddUserAddressToDB(AddressModel model,BuildContext context) async{
 
-     final ref = await FirebaseFirestore.instance.collection("Address").doc(model.ID);
-     if(count>0){
-       DisableRemainingAddresses();
-     }
+     final ref = await FirebaseFirestore.instance.collection("Address").doc(FirebaseAuth.instance.currentUser!.displayName);
      ref.set({
-       "FirstName":model.FirstName,
-       "LastName":model.LastName,
+       "Full Name":model.FirstName +" "+model.LastName,
        "MobileNumber":model.MobileNumber,
        "AlterMobile":model.AlterNateMobileNumber,
-       "Society":model.Society,
-       "Street":model.Street,
-       "LandMark":model.Landmark,
-       "City":model.City,
-       "Area":model.Area,
-       "PinCode":model.PinCode,
-       "ID":model.ID,
-       "isselected":model.isselected.toString(),
+       "Address": model.Society +" "+model.Landmark +" "+model.Area +" "+model.City +" "+model.PinCode,
        "DeliveryAddressType":model.deliveryaddresstype
      }).then((value){
        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User Address Saved Successfully")));
+       count=1;
      }).onError((error, stackTrace){
        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error ${error.toString()}")));
      });
-     checkcount();
      notifyListeners();
      return ref;
 
 
    }
+
+
+    static UpdateAddress(String uname,String uaddress,String uphone) async{
+      final ref = await FirebaseFirestore.instance.collection("Address").doc(FirebaseAuth.instance.currentUser!.displayName);
+      ref.set({
+        "Full Name":uname,
+        "MobileNumber":uphone,
+        "Address":uaddress,
+        "AlterMobile":alternatemobilenumber,
+        "DeliveryAddressType":DeliveryAddressType,
+      });
+    }
+
 }

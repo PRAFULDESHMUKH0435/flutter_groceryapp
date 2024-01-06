@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Constants/PaymentSummarySingleRow.dart';
 import 'package:flutter_groceryapp/Constants/singleitemexpansiontile.dart';
 import 'package:flutter_groceryapp/Providers/ReviewCartProvider.dart';
+import 'package:flutter_groceryapp/Services/CommonServices.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 class PaymentSummary extends StatefulWidget {
@@ -14,9 +16,7 @@ class PaymentSummary extends StatefulWidget {
 
 class _PaymentSummaryState extends State<PaymentSummary> {
   String paymentmode = "Cash On Delivery";
-
-
-
+  CommonServices services = CommonServices();
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +87,25 @@ class _PaymentSummaryState extends State<PaymentSummary> {
         title: Text("Total Amount",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         subtitle: Text("${paymentmode=="Online"?provider.payableamount(true):provider.payableamount(false)}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green),),
         trailing: InkWell(
-          onTap: (){},
+          onTap: (){
+            showDialog(
+                context: context,
+                builder: (context){
+                  return AlertDialog(
+                   icon: Icon(Icons.shopping_cart),
+                   title: Text("Confirmation"),
+                   content: Text("Are You Sure ${widget.fullname} You Want To Place Order \n Once You Place Order You Won't Be Able To Cancel Order"),
+                   actions: [
+                     OutlinedButton(onPressed: (){
+                       Navigator.pop(context);
+                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Executing Order")));
+                       ///EXECUTE  ORDER FLOW
+                     }, child: Text("Yes")),
+                     OutlinedButton(onPressed: ()=>Navigator.pop(context), child: Text("No")),
+                   ],
+                  );
+                });
+          },
           child: Container(
             width: 200,
             height: 50,

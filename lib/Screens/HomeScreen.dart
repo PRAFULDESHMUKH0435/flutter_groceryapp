@@ -8,6 +8,7 @@ import 'package:flutter_groceryapp/Screens/SearchItemScreen.dart';
 import 'package:flutter_groceryapp/Services/FirebaseServices.dart';
 import 'package:provider/provider.dart';
 import '../Constants/Banner.dart';
+import '../Providers/AddressProvider.dart';
 import '../Providers/ProfileProvider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,11 +23,16 @@ class _HomeScreenState extends State<HomeScreen> {
   
   @override
   void initState() {
+    /// LOADING ALL REFERENCE DATA
     final productprovider = Provider.of<HerbsProductProvider>(context,listen: false);
     final profileprovider = Provider.of<ProfileProvider>(context,listen: false);
+    final addressprovider = Provider.of<AddressProvider>(context,listen: false);
+    addressprovider.GetAddressCount();
+    addressprovider.GetAddress();
     profileprovider.FetchUserDetails();
     productprovider.FetchHerbsProductsData();
     productprovider.FetchFreshFruits();
+    ///
     super.initState();
   }
 
