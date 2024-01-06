@@ -72,14 +72,7 @@ class _WishListScreenState extends State<WishListScreen> {
                               color: Colors.red,
                             ),
                             onPressed: () {
-                              print(wishlistprovider.wishlistitems[0].proid);
-                              print(wishlistprovider.temp);
-                              print(index);
-                              wishlistprovider.temp.remove(wishlistprovider.wishlistitems[index].proid);
-                              wishlistprovider.RemoveItemFromWishlist(wishlistprovider.wishlistitems[index].proid);
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${wishlistprovider.wishlistitems[index].productname} Removed From  Wishlist")));
-                              setState(() {
-                              });
+
                             },
                           ))
                     ],

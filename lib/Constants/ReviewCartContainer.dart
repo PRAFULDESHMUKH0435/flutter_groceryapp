@@ -21,6 +21,8 @@ class _ReviewCartContainerState extends State<ReviewCartContainer> {
   String test2="";
 
 
+
+
   @override
   Widget build(BuildContext context) {
     print("NOW YOU ARE UNDER REVIEW CART SCREEN");
@@ -70,12 +72,12 @@ class _ReviewCartContainerState extends State<ReviewCartContainer> {
                         print(test1);
                         reviewcartprovider.cartlist.forEach((element) {
                           if(element.cartname==test1){
-                            reviewcartprovider.decreasecount(element.cartquantity.toDouble());
+                            // reviewcartprovider.decreasecount(element.cartquantity);
                             print("THE ELEMENT WHICH YOU ARE LOOKING IS ${element.cartname}  and quantity is ${element.cartquantity}");
                           }
                         });
                       }, icon: Icon(Icons.remove)),
-                      Text(widget.cartquanity.toString(),style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.yellow),),
+                      Text(reviewcartprovider.finalcartcount.toString(),style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.yellow),),
                       IconButton(onPressed: (){}, icon: Icon(Icons.add)),
                     ],
                   ),

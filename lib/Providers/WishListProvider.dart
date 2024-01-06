@@ -17,12 +17,5 @@ class WishListProvider with ChangeNotifier{
    }
 
 
-   RemoveItemFromWishlist(String id){
-     for(int i=0;i<wishlistitems.length;i++){
-       if(wishlistitems[i].proid==id){
-         wishlistitems.removeAt(i);
-         break;
-       }
-     }
-   }
+
 }

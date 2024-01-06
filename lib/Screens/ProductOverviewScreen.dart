@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Providers/WishListProvider.dart';
 import 'package:flutter_groceryapp/Screens/WishListScreen.dart';
 import 'package:provider/provider.dart';
+
+import '../Services/CommonServices.dart';
 class ProductOverViewScreen extends StatefulWidget {
   String productname;
   String productimageurl;
@@ -15,7 +17,7 @@ class ProductOverViewScreen extends StatefulWidget {
 
 class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
   String defaultvalue = 'Basil';
-
+  CommonServices commonServices = CommonServices();
   @override
   Widget build(BuildContext context) {
     final wishlistprovider = Provider.of<WishListProvider>(context);
@@ -60,21 +62,8 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
             Expanded(
               child: InkWell(
                 onTap: (){
-                  setState(() {
-                    wishlistprovider.iswishlisted=true;
-                  });
-                  if(!wishlistprovider.temp.contains(widget.productid)){
-                    wishlistprovider.temp.add(widget.productid);
-                    wishlistprovider.AddItemToWishList(widget.productname,widget.productimageurl,widget.productprice,widget.productid);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${widget.productname} Added To Wishlist")));
-                  }else{
-                    setState(() {
-                      wishlistprovider.iswishlisted=false;
-                    });
-                    wishlistprovider.temp.remove(widget.productid);
-                    wishlistprovider.RemoveItemFromWishlist(widget.productid);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${widget.productname} Removed From  Wishlist")));
-                  }
+                  print(widget.productname);
+                  commonServices.checkalreadypresentornot(widget.productname);
                 },
                 child: Container(
                   height: 50,

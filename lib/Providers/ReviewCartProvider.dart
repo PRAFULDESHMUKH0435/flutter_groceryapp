@@ -11,25 +11,37 @@ class ReviewCartProvider with ChangeNotifier{
    double shippingcharge = 10.0;
    double compendiscount =8.0;
    double onlinediscount =0.0;
-   double finalcartcount =1;
+   int finalcartcount =0;
 
    double payableamount(bool isonline){
      isonline ?onlinediscount=5.0:0.0;
      return totalprice-compendiscount+shippingcharge-onlinediscount;
    }
 
-    decreasecount(double count){
-     finalcartcount =count;
-     finalcartcount-=1;
-     notifyListeners();
-   }
+   //  decreasecount(int count){
+   //   finalcartcount =count;
+   //   finalcartcount-=1;
+   //   notifyListeners();
+   // }
+   //
+   //  increasecount(int count){
+   //   finalcartcount =count;
+   //   finalcartcount+=1;
+   //   notifyListeners();
+   // }
 
-    increasecount(double count){
-     finalcartcount =count;
-     finalcartcount+=1;
+   getfinalcartcount(String itemname) async{
+     final ref = await FirebaseFirestore.instance.collection("CartItems").doc("Test").collection("MyCart").get();
+     ref.docs.forEach((element) {
+       finalcartcount = element.get("productcount");
+       if(element.get("productname")==itemname){
+         print(element.get("productcount"));
+          return element.get("productcount");
+       }
+     });
      notifyListeners();
+     return finalcartcount;
    }
-
 
 
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Services/CommonServices.dart';
 import 'package:provider/provider.dart';
 import '../Providers/WishListProvider.dart';
 
@@ -15,6 +16,8 @@ class SingleWishListItem extends StatefulWidget {
 }
 
 class _SingleWishListItemState extends State<SingleWishListItem> {
+
+
   @override
   Widget build(BuildContext context) {
     final wishlistprovider = Provider.of<WishListProvider>(context);
@@ -56,12 +59,7 @@ class _SingleWishListItemState extends State<SingleWishListItem> {
                   color: Colors.red,
                 ),
                 onPressed: () {
-                  wishlistprovider.temp.remove(widget.proid);
-                  wishlistprovider.RemoveItemFromWishlist(widget.proid);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${widget.prodname} Removed From  Wishlist")));
-                  setState(() {
-                    wishlistprovider.iswishlisted=false;
-                  });
+
                 },
               ))
         ],

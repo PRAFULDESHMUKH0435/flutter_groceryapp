@@ -56,7 +56,7 @@ class CommonServices {
                  OutlinedButton(onPressed: ()=>Navigator.pop(context), child: Text("Cancel")),
                  OutlinedButton(onPressed: (){
                     AddressProvider.UpdateAddress(_fullnamecontroller.text.toString(),_addresscontroller.text.toString(),_mobilecontroller.text.toString());
-                    // Navigator.pop(context);
+                    Navigator.pop(context);
                     _fullnamecontroller.clear();
                     _addresscontroller.clear();
                     _mobilecontroller.clear();
@@ -64,5 +64,10 @@ class CommonServices {
                ],
              );
            });
+     }
+
+
+     checkalreadypresentornot(String name){
+       final ref = FirebaseFirestore.instance.collection("WishListItems").doc(name);
      }
 }

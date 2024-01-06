@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Constants/singlecontainer.dart';
-import 'package:flutter_groceryapp/Providers/HerbsProductProvider.dart';
-import 'package:provider/provider.dart';
 import '../Models/HerbsProductModel.dart';
 
 class SearchItemScreen extends StatefulWidget {
@@ -16,6 +14,9 @@ class SearchItemScreen extends StatefulWidget {
 class _SearchItemScreenState extends State<SearchItemScreen> {
   @override
   Widget build(BuildContext context) {
+
+    List<HerbsProductModel> updatedlist=[];
+    updatedlist=widget.searchitemslist;
     print("SEARCH ITEMS BUILD METHOD CALLED");
     return Scaffold(
       backgroundColor: Color(0xffcbcbcb),
@@ -39,11 +40,9 @@ class _SearchItemScreenState extends State<SearchItemScreen> {
               child: TextField(
                 onChanged: (newvalue){
                   setState(() {
-                    // searchprovider.SearchProducts(newvalue,widget.searchitemslist);
-                    // widget.searchitemslist=searchprovider.updatedsearchlist;
-                    //
+                    print(widget.query);
                     widget.query=newvalue;
-                    List<HerbsProductModel> updatedlist = widget.searchitemslist.where((element){
+                    updatedlist = widget.searchitemslist.where((element){
                       return element.productname.toLowerCase().contains(widget.query.toLowerCase());
                     }).toList();
                     widget.searchitemslist=updatedlist;
