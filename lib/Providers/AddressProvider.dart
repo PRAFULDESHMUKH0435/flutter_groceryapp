@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../Models/AddressModel.dart';
 
 class AddressProvider with ChangeNotifier{
@@ -48,8 +47,6 @@ class AddressProvider with ChangeNotifier{
      });
      notifyListeners();
      return ref;
-
-
    }
 
 
@@ -61,7 +58,13 @@ class AddressProvider with ChangeNotifier{
         "Address":uaddress,
         "AlterMobile":alternatemobilenumber,
         "DeliveryAddressType":DeliveryAddressType,
+      }).then((value){
+        print("success");
+      }).onError((error, stackTrace){
+        print("error occured ${error.toString()}");
       });
+
     }
+
 
 }

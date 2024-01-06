@@ -11,11 +11,26 @@ class ReviewCartProvider with ChangeNotifier{
    double shippingcharge = 10.0;
    double compendiscount =8.0;
    double onlinediscount =0.0;
+   double finalcartcount =1;
 
    double payableamount(bool isonline){
      isonline ?onlinediscount=5.0:0.0;
      return totalprice-compendiscount+shippingcharge-onlinediscount;
    }
+
+    decreasecount(double count){
+     finalcartcount =count;
+     finalcartcount-=1;
+     notifyListeners();
+   }
+
+    increasecount(double count){
+     finalcartcount =count;
+     finalcartcount+=1;
+     notifyListeners();
+   }
+
+
 
 
    SubTotal() async{

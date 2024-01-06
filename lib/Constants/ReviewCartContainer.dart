@@ -7,7 +7,7 @@ class ReviewCartContainer extends StatefulWidget {
   String cartimage;
   String cartname;
   String cartprice;
-  String cartquanity;
+  int cartquanity;
   String cartid;
   ReviewCartContainer({required this.cartimage,required this.cartname,required this.cartprice,required this.cartquanity,required this.cartid});
 
@@ -16,8 +16,14 @@ class ReviewCartContainer extends StatefulWidget {
 }
 
 class _ReviewCartContainerState extends State<ReviewCartContainer> {
+
+  String test1="";
+  String test2="";
+
+
   @override
   Widget build(BuildContext context) {
+    print("NOW YOU ARE UNDER REVIEW CART SCREEN");
     final reviewcartprovider = Provider.of<ReviewCartProvider>(context);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5.0,vertical: 5.0),
@@ -42,7 +48,7 @@ class _ReviewCartContainerState extends State<ReviewCartContainer> {
                 children: [
                   Text(widget.cartname,style: TextStyle(fontSize: 22,color: Colors.black,fontWeight: FontWeight.bold),),
                   Text(widget.cartprice,style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),),
-                  Text(widget.cartquanity,style: TextStyle(fontSize: 18),),
+                  Text(widget.cartquanity.toString(),style: TextStyle(fontSize: 18),),
                 ],
               ),),
             Column(
@@ -59,9 +65,17 @@ class _ReviewCartContainerState extends State<ReviewCartContainer> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(onPressed: (){
-
+                        print(reviewcartprovider.cartlist);
+                        test1=widget.cartname;
+                        print(test1);
+                        reviewcartprovider.cartlist.forEach((element) {
+                          if(element.cartname==test1){
+                            reviewcartprovider.decreasecount(element.cartquantity.toDouble());
+                            print("THE ELEMENT WHICH YOU ARE LOOKING IS ${element.cartname}  and quantity is ${element.cartquantity}");
+                          }
+                        });
                       }, icon: Icon(Icons.remove)),
-                      Text(widget.cartquanity,style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.yellow),),
+                      Text(widget.cartquanity.toString(),style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.yellow),),
                       IconButton(onPressed: (){}, icon: Icon(Icons.add)),
                     ],
                   ),

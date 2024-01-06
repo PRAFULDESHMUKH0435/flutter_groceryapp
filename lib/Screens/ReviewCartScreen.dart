@@ -23,6 +23,7 @@ class _ReviewCartScreenState extends State<ReviewCartScreen> {
 
   @override
   Widget build(BuildContext context) {
+  print("Hi");
     final reviewcartprovider = Provider.of<ReviewCartProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -30,7 +31,8 @@ class _ReviewCartScreenState extends State<ReviewCartScreen> {
         backgroundColor: Colors.yellow,
       ),
       body: Center(
-        child: reviewcartprovider.cartlist.length==0?  Column(
+        child: reviewcartprovider.cartlist.length==0?
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
@@ -45,12 +47,11 @@ class _ReviewCartScreenState extends State<ReviewCartScreen> {
         ):ListView.builder(
             itemCount: reviewcartprovider.cartlist.length,
             itemBuilder: (context,index){
-              print(reviewcartprovider.cartlist.length);
               return ReviewCartContainer(
                   cartimage: reviewcartprovider.cartlist[index].cartimage,
                   cartname: reviewcartprovider.cartlist[index].cartname,
                   cartprice: reviewcartprovider.cartlist[index].cartprice.toString(),
-                  cartquanity: reviewcartprovider.cartlist[index].cartquantity.toString(),
+                  cartquanity: reviewcartprovider.cartlist[index].cartquantity,
                   cartid: reviewcartprovider.cartlist[index].cartid);
             }),
       ),

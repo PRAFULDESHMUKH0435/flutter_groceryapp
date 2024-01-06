@@ -72,6 +72,14 @@ class MyDrawer2 extends StatelessWidget {
                 },
               ),
               ListTile(
+                title: Text("My Orders"),
+                leading: Icon(Icons.shopping_bag_outlined),
+                onTap: (){
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>WishListScreen()));
+                },
+              ),
+
+              ListTile(
                 title: Text("Cart"),
                 leading: Icon(Icons.shopping_bag_outlined),
                 onTap: (){
