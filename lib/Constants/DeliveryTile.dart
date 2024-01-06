@@ -4,14 +4,18 @@ class DeliveryTile extends StatefulWidget {
   String address;
   String phone;
   String ID;
+  String isselectedornot;
   String deladdresstype;
-   DeliveryTile({required this.username,required this.address,required this.phone,required this.ID,required this.deladdresstype});
+   DeliveryTile({required this.username,required this.address,required this.phone,required this.ID,required this.deladdresstype,required this.isselectedornot});
 
   @override
   State<DeliveryTile> createState() => _DeliveryTileState();
 }
 
 class _DeliveryTileState extends State<DeliveryTile> {
+
+
+
   OpenDialogBox(BuildContext context){
     return showDialog(context: context,
         builder: (context){
@@ -21,7 +25,6 @@ class _DeliveryTileState extends State<DeliveryTile> {
             actions: [
               ElevatedButton(onPressed: ()=>Navigator.of(context).pop(true), child: Text("No")),
               ElevatedButton(onPressed: (){
-
                 Navigator.of(context).pop(true);
               }, child: Text("Yes")),
             ],
@@ -31,35 +34,23 @@ class _DeliveryTileState extends State<DeliveryTile> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onLongPress: (){
-        OpenDialogBox(context);
-      },
-      child: Container(
-        height: 120,
+    return Container(
+      height: 120,
+      margin: EdgeInsets.symmetric(horizontal: 8.0,vertical: 5.0),
+      decoration: BoxDecoration(
         color: Colors.grey,
-        margin: EdgeInsets.symmetric(horizontal: 5.0,vertical: 5.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Radio(value: "praful", groupValue: "praful", onChanged: (newvalue){}),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(widget.username,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),),
-                    SizedBox(width: 50,),
-                    Chip(label: Text(widget.deladdresstype),backgroundColor: Colors.yellow,)
-                  ],),
-                Text(widget.address,style: TextStyle(fontSize: 14)),
-                Text(widget.phone,style: TextStyle(fontSize: 14),)
-              ],
-            ),
-
-          ],
-        ),
+      ),
+      child: RadioListTile(
+        title: Text(widget.username,style:  TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+        subtitle: Text(widget.address,style:  TextStyle(fontSize: 18)),
+        groupValue: widget.isselectedornot,
+        secondary: Text(widget.deladdresstype,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
+        value: widget.deladdresstype,
+        onChanged: (newvalue){
+          setState(() {
+            widget.isselectedornot=newvalue!;
+          });
+        },
       ),
     );
   }

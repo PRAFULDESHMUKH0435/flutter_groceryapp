@@ -1,18 +1,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_groceryapp/Providers/AddressProvider.dart';
 import 'package:flutter_groceryapp/Screens/AddDeliveryAddress.dart';
 import 'package:flutter_groceryapp/Screens/PaymentSummary.dart';
 import 'package:flutter_groceryapp/Services/FirebaseServices.dart';
+import 'package:provider/provider.dart';
 
 import '../Constants/DeliveryTile.dart';
-class DeliveryDetailsScreen extends StatelessWidget {
+class DeliveryDetailsScreen extends StatefulWidget {
    DeliveryDetailsScreen({super.key});
+
+  @override
+  State<DeliveryDetailsScreen> createState() => _DeliveryDetailsScreenState();
+}
+
+class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
    FirebaseServices services = FirebaseServices();
+
+
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final addressprovider = Provider.of<AddressProvider>(context,listen: false);
+    print("Check Count Method Called");
+    addressprovider.checkcount();
+    print(" 111   Check Count Method Returned Count As ${addressprovider.count}");
+    print("INITSTATE ADDRESS COUNT LENGTH IS ${addressprovider.count}");
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    print("LENGTH IS");
-    print(services.checkcount());
+    final addressprovider = Provider.of<AddressProvider>(context);
+    print("UPDATED ADDRESS COUNT LENGTH IS ${addressprovider.count}");
     return Scaffold(
       appBar: AppBar(
         title: Text("Delivery Page"),
@@ -26,34 +47,39 @@ class DeliveryDetailsScreen extends StatelessWidget {
               title: Text("Deliver To",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
             ),
             Divider(height: 10),
-            FirebaseServices.count==0?
+            addressprovider.count==0?
             Container(
               height: 200,
               width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: 8.0),
+              margin: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
               decoration: BoxDecoration(
                 color: Colors.yellow,
-                borderRadius: BorderRadius.all(Radius.circular(14.0))
               ),
-              child: Center(child: Text("Address Is Not Selected",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),)
+              child: Center(child: Text("Please Select Delivery Address")),
+            )
                 : Expanded(
               child: StreamBuilder(
                 stream:   FirebaseFirestore.instance.collection("Address").snapshots(),
                 builder: (context,snapshot){
-                  return ListView.builder(
-                      itemCount: snapshot.data!.size,
-                      itemBuilder: (context,index){
-                        String fullname = snapshot.data!.docs[index]['FirstName']+snapshot.data!.docs[index]['LastName'];
-                        String address = snapshot.data!.docs[index]['Society'] +snapshot.data!.docs[index]['Street'] +snapshot.data!.docs[index]['Area'] +snapshot.data!.docs[index]['City'];
-                        String deliveryaddtype = snapshot.data!.docs[index]['DeliveryAddressType'];
-                        return DeliveryTile(
-                            ID: snapshot.data!.docs[index]['ID'],
-                            username: fullname,
-                            address: address,
-                            deladdresstype: deliveryaddtype,
-                            phone: snapshot.data!.docs[index]['MobileNumber']);
-                      }
-                  );
+                  if(snapshot.connectionState==ConnectionState.waiting){
+                    return Center(child: CircularProgressIndicator());
+                  }else{
+                    return ListView.builder(
+                        itemCount: snapshot.data!.size,
+                        itemBuilder: (context,index){
+                          String fullname = snapshot.data!.docs[index]['FirstName']+snapshot.data!.docs[index]['LastName'];
+                          String address = snapshot.data!.docs[index]['Society'] +snapshot.data!.docs[index]['Street'] +snapshot.data!.docs[index]['Area'] +snapshot.data!.docs[index]['City'];
+                          String deliveryaddtype = snapshot.data!.docs[index]['DeliveryAddressType'];
+                          return DeliveryTile(
+                              isselectedornot: snapshot.data!.docs[index]['isselected'],
+                              ID: snapshot.data!.docs[index]['ID'],
+                              username: fullname,
+                              address: address,
+                              deladdresstype: deliveryaddtype,
+                              phone: snapshot.data!.docs[index]['MobileNumber']);
+                        }
+                    );
+                  }
                 },
               ),
             ),

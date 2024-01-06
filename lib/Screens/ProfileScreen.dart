@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_groceryapp/Constants/MyDrawer2.dart';
 import 'package:flutter_groceryapp/Providers/ProfileProvider.dart';
 import 'package:provider/provider.dart';
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-
-
-
 
   @override
   Widget build(BuildContext context) {
     final profile = Provider.of<ProfileProvider>(context);
     profile.FetchUserDetails();
     return Scaffold(
-      drawer: MyDrawer2(),
-      appBar: AppBar(title: Text("Profile"),backgroundColor: Colors.yellow,),
+      appBar: AppBar(
+        title: Text("User Profile"),
+        backgroundColor: Colors.yellow,
+      ),
+      backgroundColor: Colors.yellow,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           CircleAvatar(
             radius: 50,

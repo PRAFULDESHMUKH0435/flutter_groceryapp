@@ -50,28 +50,5 @@ class FirebaseServices{
      count=ref.size;
   }
 
-  AddUserAddressToDB(AddressModel model,BuildContext context) async{
 
-    final ref = await FirebaseFirestore.instance.collection("Address").doc(model.ID);
-    ref.set({
-      "FirstName":model.FirstName,
-      "LastName":model.LastName,
-      "MobileNumber":model.MobileNumber,
-      "AlterMobile":model.AlterNateMobileNumber,
-      "Society":model.Society,
-      "Street":model.Street,
-      "LandMark":model.Landmark,
-      "City":model.City,
-      "Area":model.Area,
-      "PinCode":model.PinCode,
-      "ID":model.ID,
-      "DeliveryAddressType":model.deliveryaddresstype
-    }).then((value){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User Address Saved Successfully")));
-    }).onError((error, stackTrace){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error ${error.toString()}")));
-    });
-    return ref;
-
-  }
 }

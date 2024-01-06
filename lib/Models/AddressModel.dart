@@ -11,6 +11,7 @@ class AddressModel{
   String PinCode;
   String ID;
   String deliveryaddresstype;
+  bool isselected;
   AddressModel(
       {required this.FirstName,
         required this.LastName,
@@ -23,6 +24,7 @@ class AddressModel{
         required this.Area,
         required this.ID,
         required this.deliveryaddresstype,
+        required this.isselected,
         required this.PinCode,}
       );
 }

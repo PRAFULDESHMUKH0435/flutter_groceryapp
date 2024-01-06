@@ -8,13 +8,21 @@ class ReviewCartProvider with ChangeNotifier{
    List<CartModel>  cartlist =[];
    double totalprice = 0.0;
    double totalamount =0.0;
+   double shippingcharge = 10.0;
+   double compendiscount =8.0;
+   double onlinediscount =0.0;
+
+   double payableamount(bool isonline){
+     isonline ?onlinediscount=5.0:0.0;
+     return totalprice-compendiscount+shippingcharge-onlinediscount;
+   }
+
 
    SubTotal() async{
      final ref = await FirebaseFirestore.instance.collection("CartItems").doc("Test").collection("MyCart").get();
       ref.docs.forEach((element) {
         totalamount+=element.get("productprice")*element.get("productcount");
       });
-      return totalamount;
    }
 
    AddItemToReviewCart(String proname,String proid,String proimage,int proprice,int count) async{

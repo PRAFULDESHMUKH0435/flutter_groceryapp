@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Models/AddressModel.dart';
 import 'package:flutter_groceryapp/Services/CommonServices.dart';
 import 'package:flutter_groceryapp/Services/FirebaseServices.dart';
+import 'package:provider/provider.dart';
+
+import '../Providers/AddressProvider.dart';
 
 class AddDeliveryAddress extends StatefulWidget {
   const AddDeliveryAddress({super.key});
@@ -36,6 +39,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
 
   @override
   Widget build(BuildContext context) {
+    final addressprovider = Provider.of<AddressProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Add Delivery Address"),
@@ -300,10 +304,11 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
         onTap: (){
           if(_formkey.currentState!.validate()){
             services.checkcount();
-            print(FirebaseServices.count);
+            print("ADDRESS PROVIDER COUNT IS ${addressprovider.count}");
             if(FirebaseServices.count<3){
               String ID = DateTime.now().millisecondsSinceEpoch.toString();
-              services.AddUserAddressToDB(AddressModel(
+
+              addressprovider.AddUserAddressToDB(AddressModel(
                 ID: ID,
                 FirstName:  _firstnamecontroller.text.toString(),
                 LastName: _lastnamecontroller.text.toString(),
@@ -314,6 +319,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                 Landmark: _landmarkcontroller.text.toString(),
                 City: _citycontroller.text.toString(),
                 Area: _areacontroller.text.toString(),
+                isselected: true,
                 PinCode: _pincodecontroller.text.toString(),
                 deliveryaddresstype: deliveryaddresstype
               ),context);
@@ -327,6 +333,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
               _citycontroller.clear();
               _areacontroller.clear();
               _pincodecontroller.clear();
+              print("ADDRESS PROVIDER COUNT IS ${addressprovider.count}");
             }else{
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("At Max 3 Address Can Be Saved Only")));
             }

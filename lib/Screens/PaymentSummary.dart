@@ -3,8 +3,8 @@ import 'package:flutter_groceryapp/Constants/PaymentSummarySingleRow.dart';
 import 'package:flutter_groceryapp/Constants/singleitemexpansiontile.dart';
 import 'package:flutter_groceryapp/Providers/ReviewCartProvider.dart';
 import 'package:provider/provider.dart';
-class PaymentSummary extends StatefulWidget {
 
+class PaymentSummary extends StatefulWidget {
   @override
   State<PaymentSummary> createState() => _PaymentSummaryState();
 }
@@ -12,9 +12,12 @@ class PaymentSummary extends StatefulWidget {
 class _PaymentSummaryState extends State<PaymentSummary> {
   String paymentmode = "Cash On Delivery";
 
+
+
+
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ReviewCartProvider>(context,listen: false);
+    final provider = Provider.of<ReviewCartProvider>(context);
     provider.SubTotal();
     return Scaffold(
       backgroundColor: Color(0xffcbcbcb),
@@ -39,9 +42,9 @@ class _PaymentSummaryState extends State<PaymentSummary> {
               );
             }).toList(),),
           Divider(height: 1,color: Colors.black,),
-          PaymentSummarySingleContainer(title1: "Sub Total",title2: "${provider.totalamount}"),
-          PaymentSummarySingleContainer(title1: "Shipping Charge",title2: "\$0"),
-          PaymentSummarySingleContainer(title1: "Compen Discount",title2: "\$10"),
+          PaymentSummarySingleContainer(title1: "Sub Total",title2: "${provider.totalprice}"),
+          PaymentSummarySingleContainer(title1: "Shipping Charge",title2: "(+) ${provider.shippingcharge}"),
+          PaymentSummarySingleContainer(title1: "Compen Discount",title2: "(-) ${provider.compendiscount}"),
           Divider(height: 1,color: Colors.black,),
           Container(
               margin: EdgeInsets.only(left: 12.0,top: 8.0),
@@ -55,6 +58,10 @@ class _PaymentSummaryState extends State<PaymentSummary> {
                       onChanged: (newvalue){
                         setState(() {
                           paymentmode=newvalue!;
+                          print(paymentmode);
+                          if(provider.onlinediscount==5.0){
+                            provider.onlinediscount=0.0;
+                          }
                         });
                       }),
                   RadioListTile(
@@ -64,6 +71,8 @@ class _PaymentSummaryState extends State<PaymentSummary> {
                       onChanged: (newvalue){
                         setState(() {
                           paymentmode=newvalue!;
+                          print(paymentmode);
+                          provider.payableamount(true);
                         });
                       }),
                 ],
@@ -73,7 +82,7 @@ class _PaymentSummaryState extends State<PaymentSummary> {
       ),
       bottomNavigationBar: ListTile(
         title: Text("Total Amount",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-        subtitle: Text("\$300",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green),),
+        subtitle: Text("${paymentmode=="Online"?provider.payableamount(true):provider.payableamount(false)}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green),),
         trailing: InkWell(
           onTap: (){},
           child: Container(
