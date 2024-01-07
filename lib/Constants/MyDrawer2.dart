@@ -5,6 +5,7 @@ import 'package:flutter_groceryapp/Screens/ContactScreen.dart';
 import 'package:flutter_groceryapp/Screens/LoginScreen.dart';
 import 'package:flutter_groceryapp/Screens/ProfileScreen.dart';
 import 'package:flutter_groceryapp/Screens/ReviewCartScreen.dart';
+import 'package:flutter_groceryapp/Screens/SignUpScreen.dart';
 import 'package:provider/provider.dart';
 
 import '../Screens/WishListScreen.dart';
@@ -94,7 +95,7 @@ class MyDrawer2 extends StatelessWidget {
                 leading: Icon(Icons.logout),
                 onTap: (){
                   FirebaseAuth.instance.signOut();
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
                 },
               ),
             ],

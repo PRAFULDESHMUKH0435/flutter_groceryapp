@@ -47,7 +47,7 @@ class FirebaseServices{
         email: uemail,
         password: upassword).then((value){
           print(value);
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
        }).onError((error, stackTrace){
         print(error.toString());
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.toString())));
@@ -87,7 +87,7 @@ class FirebaseServices{
        });
   }
 
-   checkcount() async{
+  checkcount() async{
      final ref = await FirebaseFirestore.instance.collection("Address").get();
      count=ref.size;
   }

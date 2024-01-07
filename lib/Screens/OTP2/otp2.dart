@@ -1,14 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Screens/HomeScreen.dart';
-import 'OTPLOGIC.dart';
 
 
-class VerifyOTP extends StatelessWidget {
+class OTP2 extends StatelessWidget {
   String verificationId;
-   VerifyOTP({super.key,required this.verificationId});
-   final otpcontroller = TextEditingController();
-   OTPVALIDATIONANDVERIFICATION otpvalidation = OTPVALIDATIONANDVERIFICATION();
+  OTP2({super.key,required this.verificationId});
+  final otpcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +39,14 @@ class VerifyOTP extends StatelessWidget {
               ),
             ),
             ElevatedButton(onPressed: () async{
-              final credential = PhoneAuthProvider.credential(
+              final credentials = PhoneAuthProvider.credential(
                   verificationId: verificationId,
                   smsCode: otpcontroller.text.toString());
               try{
-                await FirebaseAuth.instance.signInWithCredential(credential);
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                await FirebaseAuth.instance.signInWithCredential(credentials);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
               }catch(e){
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString()),duration: Duration(seconds: 5),));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
               }
             }, child: Text("Verify OTP")),
           ],

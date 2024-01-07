@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_groceryapp/Screens/HomeScreen.dart';
 import 'package:flutter_groceryapp/Screens/LoginScreen.dart';
 import 'package:flutter_groceryapp/Screens/OTP/PhoneNumberVerification.dart';
+import 'package:flutter_groceryapp/Screens/OTP2/otp1.dart';
 import 'package:flutter_groceryapp/Screens/RegistartionScreen.dart';
 import 'package:flutter_groceryapp/Screens/SignUpScreen.dart';
 import 'package:flutter_groceryapp/Screens/SplashScreen.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         ],
     child:  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PhoneNumberVerification(),
+      home: SplashScreen(),
     ),);
   }
 }

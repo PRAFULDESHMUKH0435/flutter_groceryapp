@@ -20,10 +20,6 @@ class OTPVALIDATIONANDVERIFICATION {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error : ${e.toString()}"),duration: Duration(seconds: 5),));
       },
       codeSent: (String verificationId, int? resendToken) async {
-        // String smsCode = 'xxxx';
-        // PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
-        // await FirebaseAuth.instance.signInWithCredential(credential);
-        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Code Send Successfully ${smsCode}"),duration: Duration(seconds: 5),));
         Navigator.push(context, MaterialPageRoute(builder: (context)=>VerifyOTP(verificationId: verificationId)));
       },
       codeAutoRetrievalTimeout: (String verificationId) {
