@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Providers/ProfileProvider.dart';
 import 'package:flutter_groceryapp/Screens/ContactScreen.dart';
+import 'package:flutter_groceryapp/Screens/LoginScreen.dart';
 import 'package:flutter_groceryapp/Screens/ProfileScreen.dart';
 import 'package:flutter_groceryapp/Screens/ReviewCartScreen.dart';
 import 'package:provider/provider.dart';
@@ -80,10 +82,19 @@ class MyDrawer2 extends StatelessWidget {
               ),
 
               ListTile(
-                title: Text("Cart"),
-                leading: Icon(Icons.shopping_bag_outlined),
+                title: Text(" My Cart"),
+                leading: Icon(Icons.shopping_cart_outlined),
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewCartScreen()));
+                },
+              ),
+
+              ListTile(
+                title: Text("Logout"),
+                leading: Icon(Icons.logout),
+                onTap: (){
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
                 },
               ),
             ],

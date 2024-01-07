@@ -17,6 +17,8 @@ class ProductOverViewScreen extends StatefulWidget {
 
 class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
   String defaultvalue = 'Basil';
+  String quantity="50Gram";
+
   CommonServices commonServices = CommonServices();
   @override
   Widget build(BuildContext context) {
@@ -49,10 +51,31 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
               padding: const EdgeInsets.only(left: 8.0,top: 5.0),
               child: Text('Available Options',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
             ),
-            Container(height: 40,color: Colors.red,),
+            Container(height: 50,
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: Center(
+                child: RadioListTile(
+                  title: Text("50 Gram",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  value: "50Gram",
+                  groupValue: quantity,
+                  onChanged: (newvalue){
+                    setState(() {
+                      quantity=newvalue.toString();
+                      print(quantity);
+                    });
+                  },
+                  secondary: ElevatedButton(
+                    child: Text("+ Add"),
+                    onPressed: (){},
+                  )
+                ),
+              ),
+            ),
             Text('About This Product',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
             Expanded(
-                child: Text('Basil is an annual herbaceous plant in the mint family Lamiaceae. It has square stems with leaves that grow on opposite sides, and the leaves are rounded, slightly cupped, and curve to form at point at the tip. The leaves are generally light green, although some varieties have reddish or purplish leaves.',style: TextStyle(fontSize: 18),))
+                child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    child: Text('Basil is an annual herbaceous plant in the mint family Lamiaceae. It has square stems with leaves that grow on opposite sides, and the leaves are rounded, slightly cupped, and curve to form at point at the tip. The leaves are generally light green, although some varieties have reddish or purplish leaves.',style: TextStyle(fontSize: 18),)))
           ],
         ),
       ),
@@ -61,9 +84,14 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
           children: [
             Expanded(
               child: InkWell(
-                onTap: (){
-                  print(widget.productname);
-                  commonServices.checkalreadypresentornot(widget.productname);
+                onTap: ()  {
+                  // print(widget.productname);
+                  wishlistprovider.checkalreadypresentornot(widget.productname);
+                  if(wishlistprovider.iswishlisted){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(" ${widget.productname} Already Present In Wishlist Items")));
+                  }else{
+                    
+                  }
                 },
                 child: Container(
                   height: 50,

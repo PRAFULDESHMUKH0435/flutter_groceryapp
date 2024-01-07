@@ -67,7 +67,5 @@ class CommonServices {
      }
 
 
-     checkalreadypresentornot(String name){
-       final ref = FirebaseFirestore.instance.collection("WishListItems").doc(name);
-     }
+
 }

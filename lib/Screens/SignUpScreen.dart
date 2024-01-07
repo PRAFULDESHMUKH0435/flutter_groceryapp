@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_groceryapp/Screens/HomeScreen.dart';
 import 'package:flutter_groceryapp/Screens/RegistartionScreen.dart';
+import 'package:flutter_groceryapp/Services/FirebaseServices.dart';
+
+import '../Services/GoogleSignIn.dart';
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -14,17 +17,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final _passwordcontroller = TextEditingController();
     bool isobsecured = true;
     final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+    FirebaseServices firebaseservices = FirebaseServices();
 
   String? UserNameValidator(value){
     if(value.isEmpty){
       return "This Field Is Required";
     }
+    return null;
   }
 
   String? PasswordValidator(value){
     if(value.isEmpty){
       return "This Field Is Required";
     }
+    return null;
   }
 
 
@@ -93,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             InkWell(
               onTap: (){
                 if(_formkey.currentState!.validate()){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                 firebaseservices.LoginUser(_usernamecontroller.text.toString(), _passwordcontroller.text.toString(),context);
                 }else{
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("All Fields Are Mandatory")));
                 }
@@ -120,6 +126,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>RegistrationScreen()));
                       },
                       child: Text("Create One",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)))
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 5.0),
+              child: Text("Sign Up Using ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 8.0,vertical: 14.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap:(){
+                      Authentication.signInWithGoogle(context: context);
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      child:  Image(image: AssetImage('assets/Images/google.png')),
+                    ),
+                  ),
+                  SizedBox(width: 20,),
+                  InkWell(
+                     onTap: (){
+
+                     },
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      child:  Image(image: AssetImage('assets/Images/facebook.png')),
+                    ),
+                  ),
+
                 ],
               ),
             )

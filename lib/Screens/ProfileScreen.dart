@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 50,
-            backgroundImage: NetworkImage(profile.userphotourl),
+            backgroundImage: NetworkImage(profile.userphotourl??"https://cdn-icons-png.flaticon.com/512/219/219983.png"),
           ),
           ListTile(
             title: Text(profile.username),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_groceryapp/Screens/LoginScreen.dart';
 import 'package:flutter_groceryapp/Screens/SignUpScreen.dart';
 
+import '../Services/FirebaseServices.dart';
 import 'HomeScreen.dart';
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -16,14 +16,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _phonecontroller = TextEditingController();
    final _emailcontroller = TextEditingController();
    final _addresscontroller = TextEditingController();
+  final _passwordcontroller = TextEditingController();
 
   bool isobsecured = true;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  FirebaseServices firebaseservices = FirebaseServices();
 
   String? UserNameValidator(value){
     if(value.isEmpty){
       return "This Field Is Required";
     }
+    return null;
+  }
+  String? PasswordValidator(value){
+    if(value.isEmpty){
+      return "This Field Is Required";
+    }
+    return null;
   }
 
   String? EmailValidator(value){
@@ -36,6 +45,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     if(!emailValid){
       return "Invalid  Email Address";
     }
+    return null;
   }
 
   String? PhoneValidator(value){
@@ -45,12 +55,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     if(value.length!=10){
       return "Mobile Number Should Be 10 Digit Long";
     }
+    return null;
   }
 
   String? AddressValidator(value){
     if(value.isEmpty){
       return "This Field Is Required";
     }
+    return null;
   }
 
 
@@ -60,9 +72,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       backgroundColor: Colors.yellow,
       body: Form(
         key: _formkey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
           children: [
+
+            SizedBox(height: 120,),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 8.0,vertical: 5.0),
               child: TextFormField(
@@ -158,10 +171,46 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
               ),
             ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 8.0,vertical: 5.0),
+              child: TextFormField(
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: isobsecured,
+                controller: _passwordcontroller,
+                validator: PasswordValidator,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(icon:isobsecured?Icon(Icons.visibility_off_outlined):Icon(Icons.remove_red_eye),onPressed: (){
+                      setState(() {
+                        isobsecured=!isobsecured;
+                      });
+                    }),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(14.0)),
+                        borderSide: BorderSide(color: Colors.white70)
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(14.0)),
+                        borderSide: BorderSide(color: Colors.green)
+                    ),
+                    label: Text("Password",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                    hintText: "Enter Password",
+                    filled: true,
+                    fillColor: Colors.grey
+                ),
+              ),
+            ),
+
             InkWell(
               onTap: (){
                 if(_formkey.currentState!.validate()){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  firebaseservices.RegisterUser(_usernamecontroller.text.toString(),_emailcontroller.text.toString(),_phonecontroller.text.toString(),_addresscontroller.text.toString(),_passwordcontroller.text.toString(),context);
+                  _emailcontroller.clear();
+                  _phonecontroller.clear();
+                  _addresscontroller.clear();
+                  _passwordcontroller.clear();
+                  _usernamecontroller.clear();
                 }else{
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("All Fields Are Mandatory")));
                 }
